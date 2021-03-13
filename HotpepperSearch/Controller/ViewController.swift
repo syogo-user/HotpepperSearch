@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import Lottie
+import SCLAlertView
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, DoneCatchDataProtcol ,UITextFieldDelegate{
 
     
@@ -24,7 +25,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var totalHitCount = Int()
     var urlArray = [String]()
     var nameStringArray = [String]()
-
     
     var indexNumber = Int()
     var annotation = MKPointAnnotation()
@@ -119,7 +119,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //ローディングを行う
         startLoad()
         //textFieldの文字、didUpdateLocationsで取得した緯度、経度とAPIキーを用いてURLを作成
-        let urlString = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apikey)&lat=\(latitude)&lng=\(longitude)&range=3&count=50&format=json&keyword=\(textField.text!)"
+        let urlString = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apikey)&lat=\(latitude)&lng=\(longitude)&range=5&count=50&format=json&keyword=\(textField.text!)"
         
         //通信を行う
         let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
@@ -128,16 +128,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     private func addAnnotation(shopData :[ShopData]){
         removeArray()
-        if totalHitCount != 0{
+
+        if totalHitCount == 0{
+            SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK")        
+        }else{
             for i in 0...totalHitCount - 1{
                 annotation = MKPointAnnotation()
                 //緯度、経度を設定
                 annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(shopData[i].latitude ?? 0.0), CLLocationDegrees(shopData[i].longitude ?? 0.0))
                 //タイトル
                 annotation.title = shopData[i].name
-                //            annotation.subtitle = shopData[i].
                 urlArray.append(shopData[i].url ?? "")
                 nameStringArray.append(shopData[i].name ?? "")
+                
                 mapView.addAnnotation(annotation)
             }
         }
@@ -145,8 +148,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     private func removeArray(){
         //mapViewの前回のアノテーション(ピン)を消去する
-        guard let mapAnotaionts = mapView.annotations as? MKAnnotation else{return}
-        mapView.removeAnnotation(mapAnotaionts)
+        let mapAnotaionts = mapView.annotations
+        mapView.removeAnnotations(mapAnotaionts)
         urlArray   = []
         nameStringArray = []
     }
