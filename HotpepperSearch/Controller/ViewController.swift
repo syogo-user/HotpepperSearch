@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 import Lottie
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, DoneCatchDataProtcol {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, DoneCatchDataProtcol ,UITextFieldDelegate{
 
     
 
@@ -23,9 +23,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var shopDataArray = [ShopData]()
     var totalHitCount = Int()
     var urlArray = [String]()
-    var imageStringArray = [String]()
     var nameStringArray = [String]()
-//    var telArray = [String()]
+
     
     var indexNumber = Int()
     var annotation = MKPointAnnotation()
@@ -35,11 +34,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         startUpdatingLocation()
         configureSubViews()
+        let gesture = UITapGestureRecognizer(target:self,action: #selector(dismissKeyborad))
+        gesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(gesture)
+        textField.delegate = self
+        textField.returnKeyType = .search
+    }
+    @objc private func dismissKeyborad(){
+        //キーボードを閉じる
+        self.view.endEditing(true)
     }
     //Lottieを表示する
-    func startLoad(){
+    private func startLoad(){
         animationView = AnimationView()
-        let animation = Animation.named("1")
+        let animation = Animation.named("load")
         animationView.frame = view.bounds
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
@@ -48,7 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         animationView.play()
     }
     //位置情報を取得してよいか判定
-    func startUpdatingLocation(){
+    private func startUpdatingLocation(){
         locationManager .requestAlwaysAuthorization()
         let status = CLAccuracyAuthorization.fullAccuracy
         if status == .fullAccuracy{
@@ -57,6 +65,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
 //http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=834159f2a4601857&lat=35.6629220&lng=139.761457&range=5&count=100&format=json
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //検索処理
+        textSearch()
+        return true
+    }
     private func configureSubViews(){
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -65,8 +78,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
         mapView.delegate = self
-        mapView.mapType = .standard //
-        mapView.userTrackingMode = .follow//
+        mapView.mapType = .standard
+        mapView.userTrackingMode = .follow
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.first //最初に取得した場所
@@ -74,7 +87,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let latitudeValue = location?.coordinate.latitude
         //経度
         let longitudeValue = location?.coordinate.longitude
-        print("★\(latitude),\(longitude)")
         latitude = latitudeValue ?? 0
         longitude = longitudeValue ?? 0
     }
@@ -98,6 +110,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
 
     @IBAction func search(_ sender: Any) {
+        //検索処理
+        textSearch()
+    }
+    private func textSearch(){
         //textFieldを閉じる
         textField.resignFirstResponder()
         //ローディングを行う
@@ -108,31 +124,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //通信を行う
         let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
         analyticsModel.doneCatchDataProtcol = self //自分に処理を委任する
-        analyticsModel.setData() 
-        
+        analyticsModel.setData()
     }
-    func addAnnotation(shopData :[ShopData]){
+    private func addAnnotation(shopData :[ShopData]){
         removeArray()
-        for i in 0...totalHitCount - 1{
-            annotation = MKPointAnnotation()
-            //緯度、経度を設定
-            annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(shopData[i].latitude ?? 0.0), CLLocationDegrees(shopData[i].longitude ?? 0.0))
-            //タイトル
-            annotation.title = shopData[i].name
-//            annotation.subtitle = shopData[i].
-            urlArray.append(shopData[i].url!)
-            imageStringArray.append(shopData[i].shopImage!)
-            nameStringArray.append(shopData[i].name!)
-            mapView.addAnnotation(annotation)
+        if totalHitCount != 0{
+            for i in 0...totalHitCount - 1{
+                annotation = MKPointAnnotation()
+                //緯度、経度を設定
+                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(shopData[i].latitude ?? 0.0), CLLocationDegrees(shopData[i].longitude ?? 0.0))
+                //タイトル
+                annotation.title = shopData[i].name
+                //            annotation.subtitle = shopData[i].
+                urlArray.append(shopData[i].url ?? "")
+                nameStringArray.append(shopData[i].name ?? "")
+                mapView.addAnnotation(annotation)
+            }
         }
         textField.resignFirstResponder()
     }
-    func removeArray(){
+    private func removeArray(){
         //mapViewの前回のアノテーション(ピン)を消去する
         guard let mapAnotaionts = mapView.annotations as? MKAnnotation else{return}
         mapView.removeAnnotation(mapAnotaionts)
         urlArray   = []
-        imageStringArray = []
         nameStringArray = []
     }
     
@@ -149,10 +164,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //詳細ページへ遷移
         indexNumber = 0
-        
-        if nameStringArray.firstIndex(of: (view.annotation?.title)!!) != nil{
-            
-            indexNumber = nameStringArray .firstIndex(of: (view.annotation?.title)!!)!
+        guard let annotationTitle = (view.annotation?.title) else { return}
+        guard let anntationTitleString = annotationTitle else { return}
+        if nameStringArray.firstIndex(of:anntationTitleString) != nil{
+            indexNumber = nameStringArray.firstIndex(of: anntationTitleString) ?? 0
             print("indexNumber",indexNumber)
         }
         performSegue(withIdentifier: "detailVC", sender: nil)
@@ -160,9 +175,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailVC = segue.destination as! DetailViewController
+        guard let detailVC = segue.destination as? DetailViewController else {return}
         detailVC.name = nameStringArray[indexNumber]
-        detailVC.imageURLString = imageStringArray[indexNumber]
         detailVC.url  = urlArray[indexNumber]
     }
     

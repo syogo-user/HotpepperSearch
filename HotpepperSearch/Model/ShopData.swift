@@ -11,6 +11,4 @@ struct ShopData{
     var longitude:Double?
     var url:String?
     var name :String?
-//    var tel:String?
-    var shopImage:String?
 }

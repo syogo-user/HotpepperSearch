@@ -41,18 +41,19 @@ class AnalyticsModel{
             switch response.result{
             case .success :
             do{
-                let json:JSON = try JSON(data:response.data!)
-                var totalHitCount = json["results"]["results_available"].int
-                if totalHitCount ?? 0 > 50{
+                guard let responseData =  response.data else{return}
+                let json:JSON = try JSON(data:responseData)
+                guard var totalHitCount = json["results"]["results_available"].int else {return }
+                
+                if totalHitCount > 50{
                     totalHitCount = 50
                 }
-                if totalHitCount! != 0{                                    
-                    for i in 0...totalHitCount! - 1{
-                        if json["results"]["shop"][i]["lat"] != "" && json["results"]["shop"][i]["lng"] != "" && json["results"]["shop"][i]["coupon_urls"]["pc"] != "" && json["results"]["shop"][i]["name"] != "" && json["results"]["shop"][i]["logo_image"] != ""{
+                if totalHitCount != 0{
+                    for i in 0...totalHitCount - 1{
+                        if json["results"]["shop"][i]["lat"] != "" && json["results"]["shop"][i]["lng"] != "" && json["results"]["shop"][i]["coupon_urls"]["pc"] != "" && json["results"]["shop"][i]["name"] != ""{
                             
                             let shopData = ShopData(latitude: json["results"]["shop"][i]["lat"].double, longitude: json["results"]["shop"][i]["lng"].double,
-                                                    url: json["results"]["shop"][i]["coupon_urls"]["pc"].string, name: json["results"]["shop"][i]["name"].string,
-                                                    shopImage: json["results"]["shop"][i]["logo_image"].string)
+                                                    url: json["results"]["shop"][i]["coupon_urls"]["pc"].string, name: json["results"]["shop"][i]["name"].string)
                             
                             self.shopDataArray.append(shopData)
                             print(self.shopDataArray.debugDescription)
@@ -61,6 +62,7 @@ class AnalyticsModel{
                         }   
                     }
                 }
+                //値をViewControllerへ返却
                 self.doneCatchDataProtcol?.catchData(arrayData: self.shopDataArray, resultCount: self.shopDataArray.count)
             }catch{
                     print("エラーです",error)
@@ -75,7 +77,7 @@ class AnalyticsModel{
     }
     
     
-    //値をControllerへ返却
+    
     
     
 }
