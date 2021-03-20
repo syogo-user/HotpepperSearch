@@ -12,6 +12,9 @@ class API{
     enum PathType:String{
         case gourmet
         case genre
+        case large_area
+        case middle_area
+        case small_area
     }
     static let shared = API()
     

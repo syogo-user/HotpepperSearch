@@ -11,12 +11,15 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
 
     var searchInfoGenleArray = [SearchInfo]()
     private var searchConditionArray :[SerachCondition] = []
-    private var itemArray  = [Genre]()
+    private var genreArray  = [Genre]()
     private var shopDataArray = [Shop]()
+    private var areaArray = [Area]()
     
+    private var selectIndex = 0
     private let cellId = "CellId"
     private let segueId1 = "selectVC"
     private let segueId2 = "resultVC"
+    private let segueId3 = "selectAreaVC"
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -56,29 +59,60 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //セル選択時に呼ばれる
         //条件設定画面に渡す情報を取得
-        fetchItemSearchInfo()
+        fetchItemSearchInfo(index:indexPath.row)
 
     }
 
 
-    private func fetchItemSearchInfo(){
+    private func fetchItemSearchInfo(index:Int){
         let params = [String:String]()
-        API.shared.request(path: .genre, params: params, type: Items.self) { (items) in
-            //戻ってきたときに呼ばれる
-            self.itemArray = items.results.genre
-            //条件設定画面に遷移
-            self.performSegue(withIdentifier:self.segueId1 , sender: nil)
+        self.selectIndex = index
+        
+        switch index {
+        case 0:
+            break
+            
+        case 1:
+            //エリア
+            API.shared.request(path: .large_area, params: params, type: LargeAreaItems.self) { (items) in
+                //戻ってきたときに呼ばれる
+                self.areaArray = items.results.large_area
+                //条件設定画面に遷移
+                self.performSegue(withIdentifier:self.segueId3 , sender: nil)
+            }
+        case 2:
+            //ジャンル
+            API.shared.request(path: .genre, params: params, type: Items.self) { (items) in
+                //戻ってきたときに呼ばれる
+                self.genreArray = items.results.genre
+                //条件設定画面に遷移
+                self.performSegue(withIdentifier:self.segueId1 , sender: nil)
+            }
+        default:
+            break
         }
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueId1{
-           let vc = segue.destination as! SelectViewController
-            vc.itemArray = itemArray
-        } else if segue.identifier == segueId2 {
+        switch segue.identifier {
+        case segueId1:
+            let vc = segue.destination as! SelectViewController
+            vc.genreArray = genreArray
+            
+        case segueId2:
             let vc = segue.destination as! ResultTableViewController
             vc.shopDataArray = self.shopDataArray
+            
+        case segueId3:
+            let vc = segue.destination as! SelectAreaViewController
+            vc.areaArray = areaArray
+        default:
+            break
         }
+
+        
+        
     }
     private func setTitleText(){
         for i in 0 ..< 3{

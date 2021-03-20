@@ -175,11 +175,60 @@
                         <outlet property="tableView" destination="j0k-4E-QoF" id="IHA-7q-FgE"/>
                         <segue destination="knZ-d4-fVz" kind="show" identifier="selectVC" id="Vvx-QD-wOw"/>
                         <segue destination="tsp-Ur-rkJ" kind="show" identifier="resultVC" id="Ouy-Kl-kfB"/>
+                        <segue destination="a6o-QK-vo5" kind="show" identifier="selectAreaVC" id="DXL-W7-Cud"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrc-zy-Sou" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1329" y="949"/>
+        </scene>
+        <!--Select Area View Controller-->
+        <scene sceneID="X2r-LC-p9m">
+            <objects>
+                <viewController id="a6o-QK-vo5" customClass="SelectAreaViewController" customModule="HotpepperSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KJc-bH-suR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E1c-dv-Bj7">
+                                <rect key="frame" x="0.0" y="56" width="414" height="652"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vg-uU-yI0">
+                                <rect key="frame" x="92" y="728" width="230" height="45"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="EpT-7E-eSW"/>
+                                    <constraint firstAttribute="width" constant="230" id="W7Z-Ye-0UG"/>
+                                </constraints>
+                                <state key="normal" title="決定">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchDecision:" destination="a6o-QK-vo5" eventType="touchUpInside" id="4Sj-rQ-aX1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yCe-fR-f6w"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yCe-fR-f6w" firstAttribute="trailing" secondItem="E1c-dv-Bj7" secondAttribute="trailing" id="3AG-Fe-Uwz"/>
+                            <constraint firstItem="E1c-dv-Bj7" firstAttribute="top" secondItem="yCe-fR-f6w" secondAttribute="top" id="Els-XJ-6bz"/>
+                            <constraint firstItem="yCe-fR-f6w" firstAttribute="bottom" secondItem="E1c-dv-Bj7" secondAttribute="bottom" constant="100" id="Flq-xm-cmP"/>
+                            <constraint firstItem="E1c-dv-Bj7" firstAttribute="leading" secondItem="yCe-fR-f6w" secondAttribute="leading" id="bLs-CE-TV8"/>
+                            <constraint firstItem="8Vg-uU-yI0" firstAttribute="top" secondItem="E1c-dv-Bj7" secondAttribute="bottom" constant="20" id="kkz-oo-dgW"/>
+                            <constraint firstItem="8Vg-uU-yI0" firstAttribute="centerX" secondItem="KJc-bH-suR" secondAttribute="centerX" id="zms-eC-NQC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qO7-t3-hbL"/>
+                    <connections>
+                        <outlet property="decisionButton" destination="8Vg-uU-yI0" id="HC4-Hv-jcr"/>
+                        <outlet property="tableView" destination="E1c-dv-Bj7" id="3Gs-p3-NKs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KuU-Mj-ew5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2203" y="1282"/>
         </scene>
         <!--Select View Controller-->
         <scene sceneID="LKB-Ur-hOr">
@@ -229,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYf-kU-pYj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2141" y="949"/>
+            <point key="canvasLocation" x="2214" y="633"/>
         </scene>
         <!--Result Table View Controller-->
         <scene sceneID="uHw-bj-q33">

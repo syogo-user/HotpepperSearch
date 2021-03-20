@@ -11,14 +11,15 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    var itemArray = [Genre]()
+    var genreArray = [Genre]()
+
     private let cellId = "cellId"
     private var searchInfoArray = [SearchInfo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = self        
         //復数選択可
         tableView.allowsMultipleSelection = true
         decisionButton.layer.cornerRadius = 15
@@ -31,12 +32,12 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         tableView.reloadData()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return genreArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SelectTableViewCell
-        cell.setData(itemArray[indexPath.row])
+        cell.setData(genreArray[indexPath.row])
         cell.selectionStyle = .none
         //検索条件を設定
         self.setSearchInfo(indexPath.row)
@@ -57,7 +58,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         
     //検索条件に設定
     private func setSearchInfo(_ index :Int){
-        let searchInfo = SearchInfo(id: itemArray[index].code, name: itemArray[index].name, check: false)
+        let searchInfo = SearchInfo(id: genreArray[index].code, name: genreArray[index].name, check: false)
         self.searchInfoArray.append(searchInfo)
     }
     

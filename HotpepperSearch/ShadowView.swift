@@ -14,6 +14,7 @@ class ShadowView :UIView{
         }
     }
     private func setupShadow() {
+        self.layer.borderWidth = 0.2
         self.layer.cornerRadius = 25
         self.layer.shadowOffset = CGSize(width: 5, height: 5)//影の方向　右下
         self.layer.shadowRadius = 2// 影のぼかし量
