@@ -113,6 +113,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //検索処理
         textSearch()
     }
+    @IBAction func detailSearch(_ sender: Any) {
+        performSegue(withIdentifier: "detailSearchVC", sender: nil) 
+    }
     private func textSearch(){
         //textFieldを閉じる
         textField.resignFirstResponder()
@@ -163,7 +166,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //shopDataArrayの中身を取り出して、annotationとして設置
          addAnnotation(shopData:  shopDataArray)
     }
-    //アノテーションがタップされたときに呼ばれる
+    //アノテーション（ピン）がタップされたときに呼ばれる
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //詳細ページへ遷移
         indexNumber = 0
