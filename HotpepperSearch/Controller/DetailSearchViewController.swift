@@ -11,10 +11,14 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
 
     var searchInfoGenleArray = [SearchInfo]()
     private var searchConditionArray :[SerachCondition] = []
+    private var itemArray  = [Genre]()
+    private var shopDataArray = [Shop]()
+    
     private let cellId = "CellId"
     private let segueId1 = "selectVC"
-    private var itemArray  = [Genre]()
+    private let segueId2 = "resultVC"
     
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
         
     override func viewDidLoad() {
@@ -23,6 +27,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
+        self.searchButton.layer.cornerRadius = 15
         //カスタムセルを設定
         let nib = UINib(nibName: "SearchConditionCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: cellId)
@@ -43,6 +48,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
 
         //セルに値を設定
         cell.setData(searchConditionArray[indexPath.row])
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator//矢印
         return cell
     }
@@ -69,6 +75,9 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         if segue.identifier == segueId1{
            let vc = segue.destination as! SelectViewController
             vc.itemArray = itemArray
+        } else if segue.identifier == segueId2 {
+            let vc = segue.destination as! ResultTableViewController
+            vc.shopDataArray = self.shopDataArray
         }
     }
     private func setTitleText(){
@@ -96,6 +105,25 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     //検索ボタン押下時
     @IBAction func searchTap(_ sender: Any) {
-//        API.shared.request(path: .gourmet, params: <#T##[String : Any]#>, type: <#T##Decodable.Protocol#>, completion: <#T##(Decodable) -> Void#>)
+        var genleCode = ""
+        self.searchInfoGenleArray.forEach { (item) in
+            genleCode = genleCode + item.id + ","
+        }
+        genleCode = genleCode.dropLast().description
+        let params = [
+            "genre":genleCode
+        ]
+        API.shared.request(path: .gourmet, params: params, type:ShopItems.self ) { (items) in
+            //戻ってきたときに呼ばれる
+            items.results.shop.forEach { (items) in
+                print("items.name:",items.name + "items.budget.name:",items.budget.name + "items.address:",items.address)
+            }
+            self.shopDataArray = items.results.shop
+            //条件設定画面に遷移
+            self.performSegue(withIdentifier:self.segueId2 , sender: nil)
+            
+
+        }
+        
     }
 }

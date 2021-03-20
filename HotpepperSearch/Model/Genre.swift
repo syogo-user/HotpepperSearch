@@ -8,6 +8,7 @@
 import Foundation
 class Items:Decodable{
     let results :Results
+
 }
 
 class Results:Decodable{
@@ -18,3 +19,7 @@ class Genre:Decodable{
     let code :String
     let name :String
 }
+
+
+
+

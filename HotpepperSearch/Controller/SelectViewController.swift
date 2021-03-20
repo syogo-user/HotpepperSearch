@@ -9,6 +9,7 @@ import UIKit
 
 class SelectViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var itemArray = [Genre]()
     private let cellId = "cellId"
@@ -20,7 +21,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         tableView.dataSource = self
         //復数選択可
         tableView.allowsMultipleSelection = true
-        
+        decisionButton.layer.cornerRadius = 15
         let nib = UINib(nibName: "SelectTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
     }
@@ -37,7 +38,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SelectTableViewCell
         cell.setData(itemArray[indexPath.row])
         cell.selectionStyle = .none
-//        //検索条件を設定
+        //検索条件を設定
         self.setSearchInfo(indexPath.row)
         return cell
     }
@@ -53,26 +54,16 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         searchInfoArray[indexPath.row].setCheckState(check: false)
         cell?.accessoryType = .none //チェック解除
     }
-    
-    
+        
     //検索条件に設定
     private func setSearchInfo(_ index :Int){
         let searchInfo = SearchInfo(id: itemArray[index].code, name: itemArray[index].name, check: false)
         self.searchInfoArray.append(searchInfo)
     }
-//    //検索条件を削除
-//    private func removeSearchInfo(_ index:Int){
-//        self.searchInfoArray.remove(at: index)
-//    }
-    
-    
     
     //決定ボタン押下時
     @IBAction func searchDecision(_ sender: Any) {
         //検索条件を前の画面に渡す
-//        guard let preNC = self.navigationControllers else{return}
-//        guard let preVC = preNC.viewControllers[preNC.viewControllers.count] as? DetailSearchViewController else{return}
-                                    
         let nav  = self.navigationController
         let preVC = nav?.viewControllers[(nav?.viewControllers.count)! - 2] as! DetailSearchViewController
         preVC.searchInfoGenleArray = self.searchInfoArray.filter {

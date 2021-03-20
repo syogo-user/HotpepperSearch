@@ -39,6 +39,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.view.addGestureRecognizer(gesture)
         textField.delegate = self
         textField.returnKeyType = .search
+        textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力（例：居酒屋）", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
     }
     @objc private func dismissKeyborad(){
         //キーボードを閉じる

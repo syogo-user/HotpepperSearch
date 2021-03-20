@@ -69,13 +69,13 @@
                     <connections>
                         <outlet property="mapView" destination="9Th-wD-JDU" id="C5k-74-mEU"/>
                         <outlet property="textField" destination="f7g-vU-lZg" id="RtO-aK-IZD"/>
-                        <segue destination="bb4-JH-zqB" kind="presentation" identifier="App" id="hth-lW-uTS"/>
+                        <segue destination="bb4-JH-zqB" kind="presentation" identifier="detailVC" id="hth-lW-uTS"/>
                         <segue destination="x6j-y2-Hko" kind="show" identifier="detailSearchVC" id="4gU-cI-Rws"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-549" y="627"/>
+            <point key="canvasLocation" x="-235" y="949"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AWg-dd-iqs">
@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HkD-ut-YPY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -120,13 +120,14 @@
                             <constraint firstItem="HkD-ut-YPY" firstAttribute="leading" secondItem="IIg-gZ-oah" secondAttribute="leading" id="yRX-wm-j2z"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="C4a-VU-RSN"/>
                     <connections>
                         <outlet property="webView" destination="HkD-ut-YPY" id="huD-uD-Lx5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQC-nD-1vc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="503" y="241"/>
+            <point key="canvasLocation" x="-194" y="1683"/>
         </scene>
         <!--Detail Search View Controller-->
         <scene sceneID="nQZ-Ra-7RY">
@@ -141,10 +142,11 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5v-QZ-xoC">
-                                <rect key="frame" x="92" y="728" width="230" height="36"/>
+                                <rect key="frame" x="92" y="728" width="230" height="45"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="bG8-W4-6t5"/>
+                                    <constraint firstAttribute="height" constant="45" id="gLM-MD-7Zb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -169,8 +171,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="U0q-q4-bFa"/>
                     <connections>
+                        <outlet property="searchButton" destination="L5v-QZ-xoC" id="eOv-rw-xOb"/>
                         <outlet property="tableView" destination="j0k-4E-QoF" id="IHA-7q-FgE"/>
                         <segue destination="knZ-d4-fVz" kind="show" identifier="selectVC" id="Vvx-QD-wOw"/>
+                        <segue destination="tsp-Ur-rkJ" kind="show" identifier="resultVC" id="Ouy-Kl-kfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nrc-zy-Sou" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -190,9 +194,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaI-DV-6Bz">
-                                <rect key="frame" x="92" y="728" width="230" height="36"/>
+                                <rect key="frame" x="92" y="728" width="230" height="45"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="P6u-f3-NwC"/>
                                     <constraint firstAttribute="width" constant="230" id="sie-dU-E7a"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -218,6 +223,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cdo-6m-00J"/>
                     <connections>
+                        <outlet property="decisionButton" destination="EaI-DV-6Bz" id="0IB-qN-KRF"/>
                         <outlet property="tableView" destination="1r0-El-Uuc" id="MgG-7u-QE2"/>
                     </connections>
                 </viewController>
@@ -225,7 +231,42 @@
             </objects>
             <point key="canvasLocation" x="2141" y="949"/>
         </scene>
+        <!--Result Table View Controller-->
+        <scene sceneID="uHw-bj-q33">
+            <objects>
+                <viewController id="tsp-Ur-rkJ" customClass="ResultTableViewController" customModule="HotpepperSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HFX-vQ-7Ga">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NZJ-4l-FWJ">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bc5-A6-FmF"/>
+                        <constraints>
+                            <constraint firstItem="NZJ-4l-FWJ" firstAttribute="top" secondItem="bc5-A6-FmF" secondAttribute="top" id="Lqa-7u-Iou"/>
+                            <constraint firstItem="bc5-A6-FmF" firstAttribute="trailing" secondItem="NZJ-4l-FWJ" secondAttribute="trailing" id="mV2-0x-O6V"/>
+                            <constraint firstItem="NZJ-4l-FWJ" firstAttribute="leading" secondItem="bc5-A6-FmF" secondAttribute="leading" id="zBo-pc-FeV"/>
+                            <constraint firstItem="bc5-A6-FmF" firstAttribute="bottom" secondItem="NZJ-4l-FWJ" secondAttribute="bottom" id="zi0-gS-yZP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fwy-fs-k2J"/>
+                    <connections>
+                        <outlet property="tableView" destination="NZJ-4l-FWJ" id="jjl-EW-uAx"/>
+                        <segue destination="bb4-JH-zqB" kind="show" identifier="shopWebVC" id="49I-SQ-cs7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SCf-of-otF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1329" y="1683"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="49I-SQ-cs7"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="filter" width="64" height="64"/>
         <image name="search" width="128" height="128"/>

@@ -10,6 +10,7 @@ target 'HotpepperSearch' do
    pod 'Alamofire', '~> 5.2'
    pod 'lottie-ios'
    pod 'SCLAlertView'
+   pod 'Nuke'
    
   target 'HotpepperSearchTests' do
     inherit! :search_paths

@@ -22,11 +22,12 @@ class API{
         let url = baseUrl  + path + "/v1/" + "?"
         var params = params
         params["key"] = "834159f2a4601857"
+        params["count"] = 100
         params["format"] = "json"
 
         
         let request = AF.request(url, method: .get, parameters: params)
-        
+    print("url:",url)
         request.responseJSON{(response) in
             guard let statucCode =  response.response?.statusCode else{return}
             if statucCode <= 300 {
