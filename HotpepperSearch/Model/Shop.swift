@@ -20,6 +20,7 @@ class Shop:Decodable{
     let budget:Budget
     let photo :Photo
     let urls :URLS
+    let free_drink :String
 }
 //料金
 class Budget:Decodable{

@@ -122,9 +122,17 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
         let searchInfo = SearchInfo(id: areaArray[index].code, name: areaArray[index].name, check: false)
         self.searchInfoArray.append(searchInfo)
     }
-    
+    //決定ボタン押下時
     @IBAction func searchDecision(_ sender: Any) {
-        
+        //検索条件を前の画面に渡す
+        let nav  = self.navigationController
+        let preVC = nav?.viewControllers[0] as! DetailSearchViewController
+        preVC.searchInfoAreaArray = self.searchInfoArray.filter {
+            //チェックがついているものだけを渡す
+            $0.check == true
+        }
+        //ルート(DetailSearchViewController)に画面遷移する
+        self.navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
     }
     
 }

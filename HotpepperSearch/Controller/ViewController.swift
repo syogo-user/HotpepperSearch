@@ -134,7 +134,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         removeArray()
 
         if totalHitCount == 0{
-            SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK")        
+            SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK",colorStyle: 0xC1272D)
         }else{
             for i in 0...totalHitCount - 1{
                 annotation = MKPointAnnotation()
