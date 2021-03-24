@@ -32,6 +32,8 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var kotatsuButton: UIButton!
     @IBOutlet weak var courseButton: UIButton!
     
+
+    @IBOutlet weak var textField: SearchTextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
         
@@ -51,6 +53,18 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
         self.searchButton.layer.cornerRadius = 15
+        self.textField.layer.cornerRadius = 15
+        self.textField.borderStyle = .none
+        self.textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderWidth  = 1
+        self.textField.layer.masksToBounds = true
+        self.tableView.isScrollEnabled = false
+        textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+//        textField.leftViewMode = .always
+//        let imageView = UIImageView(frame:CGRect(x: 40, y:0 , width: 0, height: 40))
+//        imageView.image = UIImage(named: "search")
+//        textField.leftView?.addSubview(imageView)
+
         //カスタムセルを設定
         let nib = UINib(nibName: "SearchConditionCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: cellId)
@@ -87,6 +101,9 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
 
         
         
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchConditionArray.count
@@ -158,15 +175,18 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     private func setTitleText(){
         for i in 0 ..< 2{
+            var imageName = ""
             var conditionValue = ""
             var title = ""
             switch i {
             case 0:
+                imageName = "japan"
                 title = "エリア"
                 self.searchInfoAreaArray.forEach({ (item) in
                     conditionValue = conditionValue  + item.name + ","
                 })
             case 1:
+                imageName = "spoonFork"
                 title = "ジャンル"
                 self.searchInfoGenleArray.forEach({ (item) in
                     conditionValue = conditionValue  + item.name + ","
@@ -176,7 +196,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
                 title = ""
             }
             conditionValue = conditionValue.dropLast().description //最後のカンマを削除
-            let searchCondition = SerachCondition(title, conditionValue)
+            let searchCondition = SerachCondition(imageName,title, conditionValue)
             self.searchConditionArray.append(searchCondition)
         }
     }
@@ -208,7 +228,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
                     self.buttonSelectCheckDic[dicName] = false
                 }
                 
-                print("isSelected:",button.isSelected)
             }
         }
     }
@@ -250,6 +269,12 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         params["horigotatsu"] = self.buttonSelectCheckDic["kotatsu"] ?? false ? 1 : 0 //trueのとき1
         //コース
         params["course"] = self.buttonSelectCheckDic["course"] ?? false ? 1 : 0 //trueのとき1
+        
+        //キーワード
+        let keyword = self.textField.text ?? ""
+        if keyword != ""{
+            params["keyword"] = keyword
+        }
         
         API.shared.request(path: .gourmet, params: params, type:ShopItems.self ) { (items) in
             //戻ってきたときに呼ばれる

@@ -9,6 +9,7 @@ import UIKit
 class SearchConditionCell: UITableViewCell {
 
 
+    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var conditionValue: UILabel!
     
@@ -23,6 +24,7 @@ class SearchConditionCell: UITableViewCell {
     func setData(_ searchCondition :SerachCondition){
         self.title.text = searchCondition.title
         self.conditionValue.text = searchCondition.conditionValue ?? ""
+        self.iconImageView.image = UIImage(named: searchCondition.imageName)
     }
     
     /*

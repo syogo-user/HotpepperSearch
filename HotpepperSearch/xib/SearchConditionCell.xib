@@ -14,34 +14,44 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haE-A5-4Ls">
-                    <rect key="frame" x="25" y="43.5" width="100" height="20.5"/>
+                    <rect key="frame" x="55" y="44" width="100" height="19.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="Jf6-fi-Y0i"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0v-fd-9QK">
-                    <rect key="frame" x="135" y="43" width="200" height="21"/>
+                    <rect key="frame" x="165" y="44" width="200" height="19.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="Zyp-cb-r8X"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ngr-nA-jIY">
+                    <rect key="frame" x="15" y="38.5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ngr-nA-jIY" secondAttribute="height" multiplier="1:1" id="RMX-Kh-Yvy"/>
+                        <constraint firstAttribute="width" constant="30" id="Zfb-Dr-EIG"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
-                <constraint firstItem="haE-A5-4Ls" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="Od9-E3-4VL"/>
+                <constraint firstItem="Ngr-nA-jIY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="Zdw-H9-qtP"/>
                 <constraint firstItem="haE-A5-4Ls" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aXg-zX-2At"/>
+                <constraint firstItem="Ngr-nA-jIY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ez0-Zn-qOC"/>
+                <constraint firstItem="haE-A5-4Ls" firstAttribute="leading" secondItem="Ngr-nA-jIY" secondAttribute="trailing" constant="10" id="ibV-jY-aiD"/>
                 <constraint firstItem="E0v-fd-9QK" firstAttribute="leading" secondItem="haE-A5-4Ls" secondAttribute="trailing" constant="10" id="keK-62-Gqj"/>
                 <constraint firstItem="E0v-fd-9QK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="maX-x3-Yd7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="conditionValue" destination="E0v-fd-9QK" id="FNr-nT-9gL"/>
+                <outlet property="iconImageView" destination="Ngr-nA-jIY" id="flf-YH-hhI"/>
                 <outlet property="title" destination="haE-A5-4Ls" id="JOx-4c-YEE"/>
             </connections>
             <point key="canvasLocation" x="-689.13043478260875" y="94.754464285714278"/>

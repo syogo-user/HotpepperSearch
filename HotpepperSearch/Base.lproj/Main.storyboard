@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,11 +22,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7g-vU-lZg">
-                                <rect key="frame" x="40" y="59" width="260" height="40"/>
+                                <rect key="frame" x="30" y="59" width="250" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="au7-aW-hfW"/>
+                                    <constraint firstAttribute="width" constant="250" id="au7-aW-hfW"/>
                                     <constraint firstAttribute="height" constant="40" id="cd6-v7-LTv"/>
                                 </constraints>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,7 +34,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dv3-VV-A4a">
-                                <rect key="frame" x="315" y="59" width="40" height="40"/>
+                                <rect key="frame" x="295" y="59" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dv3-VV-A4a" secondAttribute="height" multiplier="1:1" id="dct-Je-0Cv"/>
                                 </constraints>
@@ -43,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7S-Ix-Xot">
-                                <rect key="frame" x="365" y="59" width="40" height="40"/>
+                                <rect key="frame" x="345" y="59" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="H7S-Ix-Xot" secondAttribute="height" multiplier="1:1" id="Ltw-jJ-sGr"/>
                                 </constraints>
@@ -62,7 +63,7 @@
                             <constraint firstItem="H7S-Ix-Xot" firstAttribute="bottom" secondItem="dv3-VV-A4a" secondAttribute="bottom" id="Du1-Pe-STF"/>
                             <constraint firstItem="dv3-VV-A4a" firstAttribute="top" secondItem="f7g-vU-lZg" secondAttribute="top" id="K0l-qB-PiF"/>
                             <constraint firstItem="H7S-Ix-Xot" firstAttribute="leading" secondItem="dv3-VV-A4a" secondAttribute="trailing" constant="10" id="MhW-wL-tM3"/>
-                            <constraint firstItem="f7g-vU-lZg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="NZh-Ox-cn3"/>
+                            <constraint firstItem="f7g-vU-lZg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="NZh-Ox-cn3"/>
                             <constraint firstItem="dv3-VV-A4a" firstAttribute="bottom" secondItem="f7g-vU-lZg" secondAttribute="bottom" id="r9h-6i-iUY"/>
                         </constraints>
                     </view>
@@ -75,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-235" y="949"/>
+            <point key="canvasLocation" x="-236.23188405797103" y="948.88392857142856"/>
         </scene>
         <!--Search Navigation Controller-->
         <scene sceneID="AWg-dd-iqs">
@@ -160,7 +161,7 @@
                                     <action selector="searchTap:" destination="mMN-oY-vRW" eventType="touchUpInside" id="gKv-vF-a4m"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-BN-YMw">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-BN-YMw" customClass="SearchTextField" customModule="HotpepperSearch" customModuleProvider="target">
                                 <rect key="frame" x="15" y="106" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="SHC-rp-yKD"/>
@@ -168,11 +169,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-Ei-LYq">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-Ei-LYq">
                                 <rect key="frame" x="30" y="306" width="354" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6R-en-Je9">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,7 +182,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izS-Pf-FXF">
-                                        <rect key="frame" x="142" y="0.0" width="70" height="50"/>
+                                        <rect key="frame" x="120.5" y="0.0" width="113" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" 食べ放題 ">
@@ -189,7 +190,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0h-zg-E5V">
-                                        <rect key="frame" x="284" y="0.0" width="70" height="50"/>
+                                        <rect key="frame" x="241.5" y="0.0" width="112.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" 個室あり ">
@@ -201,19 +202,19 @@
                                     <constraint firstAttribute="height" constant="50" id="E3u-jC-KZX"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="8gt-Ef-4Rl">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8gt-Ef-4Rl">
                                 <rect key="frame" x="40" y="376" width="334" height="50"/>
                                 <subviews>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylA-QA-EOX">
-                                        <rect key="frame" x="0.0" y="0.0" width="70.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="101" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="    禁 煙    ">
+                                        <state key="normal" title=" 禁煙 あり ">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ng9-jM-Qto">
-                                        <rect key="frame" x="113.5" y="0.0" width="89" height="50"/>
+                                        <rect key="frame" x="109" y="0.0" width="116.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" 掘りごたつ ">
@@ -221,7 +222,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ac-5T-iAm">
-                                        <rect key="frame" x="245.5" y="0.0" width="88.5" height="50"/>
+                                        <rect key="frame" x="233.5" y="0.0" width="100.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title=" コースあり ">
@@ -264,6 +265,7 @@
                         <outlet property="searchButton" destination="L5v-QZ-xoC" id="eOv-rw-xOb"/>
                         <outlet property="tabeButton" destination="izS-Pf-FXF" id="uLU-PL-29b"/>
                         <outlet property="tableView" destination="j0k-4E-QoF" id="IHA-7q-FgE"/>
+                        <outlet property="textField" destination="J7E-BN-YMw" id="vZb-Ib-0lc"/>
                         <segue destination="knZ-d4-fVz" kind="show" identifier="selectVC" id="Vvx-QD-wOw"/>
                         <segue destination="tsp-Ur-rkJ" kind="show" identifier="resultVC" id="Ouy-Kl-kfB"/>
                         <segue destination="a6o-QK-vo5" kind="show" identifier="selectAreaVC" id="DXL-W7-Cud"/>

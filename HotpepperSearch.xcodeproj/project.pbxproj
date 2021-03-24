@@ -10,6 +10,7 @@
 		06C55D344A7FDA1E9BFF23D7 /* Pods_HotpepperSearch_HotpepperSearchUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A0CD59727349B5A5D54DC0 /* Pods_HotpepperSearch_HotpepperSearchUITests.framework */; };
 		910215DF25FCC8070078B4CC /* load.json in Resources */ = {isa = PBXBuildFile; fileRef = 910215DE25FCC8070078B4CC /* load.json */; };
 		9108AE77260955D8001334F6 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9108AE76260955D8001334F6 /* SearchNavigationController.swift */; };
+		9108AE7C260961FC001334F6 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9108AE7B260961FC001334F6 /* SearchTextField.swift */; };
 		911BFEC5260217FA0094C4B1 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFEC4260217FA0094C4B1 /* SelectViewController.swift */; };
 		911BFECD260219100094C4B1 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFECC260219100094C4B1 /* Genre.swift */; };
 		911BFED326021AF50094C4B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFED226021AF50094C4B1 /* API.swift */; };
@@ -70,6 +71,7 @@
 		85C7A91576034454A929C3A4 /* Pods-HotpepperSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotpepperSearch.release.xcconfig"; path = "Target Support Files/Pods-HotpepperSearch/Pods-HotpepperSearch.release.xcconfig"; sourceTree = "<group>"; };
 		910215DE25FCC8070078B4CC /* load.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = load.json; sourceTree = "<group>"; };
 		9108AE76260955D8001334F6 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
+		9108AE7B260961FC001334F6 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		911BFEC4260217FA0094C4B1 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		911BFECC260219100094C4B1 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		911BFED226021AF50094C4B1 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				91FB636C25FA5C7600F7D342 /* Controller */,
 				91FB633725FA5B4300F7D342 /* Main.storyboard */,
 				913519462605B90100912C90 /* ShadowView.swift */,
+				9108AE7B260961FC001334F6 /* SearchTextField.swift */,
 				91FB633125FA5B4300F7D342 /* AppDelegate.swift */,
 				91FB633325FA5B4300F7D342 /* SceneDelegate.swift */,
 				91FB633A25FA5B4400F7D342 /* Assets.xcassets */,
@@ -549,6 +552,7 @@
 				911BFEDC260249F80094C4B1 /* SelectTableViewCell.swift in Sources */,
 				91FB636825FA5C6000F7D342 /* DetailViewController.swift in Sources */,
 				914A39B426064FA500846727 /* Button.swift in Sources */,
+				9108AE7C260961FC001334F6 /* SearchTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
