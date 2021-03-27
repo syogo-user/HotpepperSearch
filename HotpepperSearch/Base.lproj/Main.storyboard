@@ -22,11 +22,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f7g-vU-lZg">
-                                <rect key="frame" x="30" y="59" width="250" height="40"/>
+                                <rect key="frame" x="30" y="59" width="299" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="au7-aW-hfW"/>
                                     <constraint firstAttribute="height" constant="40" id="cd6-v7-LTv"/>
                                 </constraints>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +33,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dv3-VV-A4a">
-                                <rect key="frame" x="295" y="59" width="40" height="40"/>
+                                <rect key="frame" x="344" y="59" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dv3-VV-A4a" secondAttribute="height" multiplier="1:1" id="dct-Je-0Cv"/>
                                 </constraints>
@@ -43,31 +42,35 @@
                                     <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i6Y-XL-wSk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7S-Ix-Xot">
-                                <rect key="frame" x="345" y="59" width="40" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX3-dM-eSQ">
+                                <rect key="frame" x="274" y="792" width="100" height="40"/>
+                                <color key="backgroundColor" red="0.90588235289999997" green="0.21960784310000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="H7S-Ix-Xot" secondAttribute="height" multiplier="1:1" id="Ltw-jJ-sGr"/>
+                                    <constraint firstAttribute="height" constant="40" id="Rhy-iH-eBM"/>
+                                    <constraint firstAttribute="width" constant="100" id="sow-kM-vmq"/>
                                 </constraints>
-                                <state key="normal" image="filter"/>
-                                <connections>
-                                    <action selector="detailSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4E4-SW-UTu"/>
-                                </connections>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="詳細検索">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.90588235294117647" green="0.2196078431372549" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="H7S-Ix-Xot" firstAttribute="top" secondItem="dv3-VV-A4a" secondAttribute="top" id="36S-sb-giq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dv3-VV-A4a" secondAttribute="trailing" constant="30" id="26X-w0-vTC"/>
                             <constraint firstItem="dv3-VV-A4a" firstAttribute="leading" secondItem="f7g-vU-lZg" secondAttribute="trailing" constant="15" id="AM1-U5-4rY"/>
                             <constraint firstItem="f7g-vU-lZg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="C4s-aC-mZY"/>
-                            <constraint firstItem="H7S-Ix-Xot" firstAttribute="bottom" secondItem="dv3-VV-A4a" secondAttribute="bottom" id="Du1-Pe-STF"/>
                             <constraint firstItem="dv3-VV-A4a" firstAttribute="top" secondItem="f7g-vU-lZg" secondAttribute="top" id="K0l-qB-PiF"/>
-                            <constraint firstItem="H7S-Ix-Xot" firstAttribute="leading" secondItem="dv3-VV-A4a" secondAttribute="trailing" constant="10" id="MhW-wL-tM3"/>
                             <constraint firstItem="f7g-vU-lZg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="NZh-Ox-cn3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lX3-dM-eSQ" secondAttribute="trailing" constant="40" id="mdd-wb-1XC"/>
                             <constraint firstItem="dv3-VV-A4a" firstAttribute="bottom" secondItem="f7g-vU-lZg" secondAttribute="bottom" id="r9h-6i-iUY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lX3-dM-eSQ" secondAttribute="bottom" constant="30" id="rTd-Sd-O9U"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailSearchButton" destination="lX3-dM-eSQ" id="IkU-Z8-E59"/>
                         <outlet property="mapView" destination="9Th-wD-JDU" id="C5k-74-mEU"/>
                         <outlet property="textField" destination="f7g-vU-lZg" id="RtO-aK-IZD"/>
                         <segue destination="bb4-JH-zqB" kind="presentation" identifier="detailVC" id="hth-lW-uTS"/>
@@ -428,7 +431,6 @@
         <segue reference="hth-lW-uTS"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="filter" width="64" height="64"/>
         <image name="search" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

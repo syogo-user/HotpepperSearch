@@ -10,6 +10,7 @@ class ShopItems:Decodable{
     let results :ShopResult
 }
 class ShopResult:Decodable{
+    let results_available:Int
     let shop:[Shop]
 }
 class Shop:Decodable{
@@ -26,6 +27,10 @@ class Shop:Decodable{
     let non_smoking:String
     let horigotatsu :String
     let course:String
+    let lat :Double
+    let lng :Double
+
+    
 }
 //料金
 class Budget:Decodable{

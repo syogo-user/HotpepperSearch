@@ -9,19 +9,20 @@ import UIKit
 import MapKit
 import Lottie
 import SCLAlertView
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, DoneCatchDataProtcol ,UITextFieldDelegate{
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate ,UITextFieldDelegate{
 
     
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var detailSearchButton: UIButton!
     
     var animationView = AnimationView()
     let locationManager = CLLocationManager()
     var latitude = Double()
     var longitude = Double()
     var apikey = "834159f2a4601857"
-    var shopDataArray = [ShopData]()
+    var shopDataArray = [Shop]()
     var totalHitCount = Int()
     var urlArray = [String]()
     var nameStringArray = [String]()
@@ -40,6 +41,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         textField.delegate = self
         textField.returnKeyType = .search
         textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力（例：居酒屋）", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+        self.detailSearchButton.layer.cornerRadius = 20
+        self.detailSearchButton.addTarget(self, action: #selector(detailSearch), for: .touchUpInside)
     }
     @objc private func dismissKeyborad(){
         //キーボードを閉じる
@@ -114,23 +117,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //検索処理
         textSearch()
     }
-    @IBAction func detailSearch(_ sender: Any) {
-        performSegue(withIdentifier: "detailSearchVC", sender: nil) 
+
+    @objc private func detailSearch(){
+        performSegue(withIdentifier: "detailSearchVC", sender: nil)
     }
+    
     private func textSearch(){
         //textFieldを閉じる
         textField.resignFirstResponder()
         //ローディングを行う
-        startLoad()
-        //textFieldの文字、didUpdateLocationsで取得した緯度、経度とAPIキーを用いてURLを作成
-        let urlString = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apikey)&lat=\(latitude)&lng=\(longitude)&range=5&count=50&format=json&keyword=\(textField.text!)"
+//        startLoad()
         
-        //通信を行う
-        let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
-        analyticsModel.doneCatchDataProtcol = self //自分に処理を委任する
-        analyticsModel.setData()
+        
+        //textFieldの文字、didUpdateLocationsで取得した緯度、経度とAPIキーを用いてURLを作成
+//        let urlString = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apikey)&lat=\(latitude)&lng=\(longitude)&range=5&count=50&format=json&keyword=\(textField.text!)"
+        let params = [
+            "lat":latitude,
+            "lng":longitude,
+            "keyword":textField.text ?? ""
+        ] as [String:Any]
+        API.shared.request(path: .gourmet, params: params, type: ShopItems.self) { (items) in
+//            self.animationView.removeFromSuperview()//アニメーションを閉じる
+            self.shopDataArray = items.results.shop
+            self.totalHitCount = items.results.results_available
+            self.addAnnotation(shopData:self.shopDataArray)
+        }
+//        //通信を行う
+//        let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
+//        analyticsModel.doneCatchDataProtcol = self //自分に処理を委任する
+//        analyticsModel.setData()
+        
+        
     }
-    private func addAnnotation(shopData :[ShopData]){
+//    func catchData(arrayData: Array<ShopData>, resultCount: Int) {
+//        //arrayData,resultCount
+////        animationView.removeFromSuperview()//アニメーションを閉じる
+////        shopDataArray = arrayData
+////        totalHitCount = resultCount
+//
+//        //shopDataArrayの中身を取り出して、annotationとして設置
+////         addAnnotation(shopData:  shopDataArray)
+//    }
+    private func addAnnotation(shopData :[Shop]){
         removeArray()
 
         if totalHitCount == 0{
@@ -139,11 +167,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             for i in 0...totalHitCount - 1{
                 annotation = MKPointAnnotation()
                 //緯度、経度を設定
-                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(shopData[i].latitude ?? 0.0), CLLocationDegrees(shopData[i].longitude ?? 0.0))
+                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(shopData[i].lat), CLLocationDegrees(shopData[i].lng))
                 //タイトル
                 annotation.title = shopData[i].name
-                urlArray.append(shopData[i].url ?? "")
-                nameStringArray.append(shopData[i].name ?? "")
+                urlArray.append(shopData[i].urls.pc)
+                nameStringArray.append(shopData[i].name)
                 
                 mapView.addAnnotation(annotation)
             }
@@ -158,15 +186,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         nameStringArray = []
     }
     
-    func catchData(arrayData: Array<ShopData>, resultCount: Int) {
-        //arrayData,resultCount
-        animationView.removeFromSuperview()//アニメーションを閉じる
-        shopDataArray = arrayData
-        totalHitCount = resultCount
 
-        //shopDataArrayの中身を取り出して、annotationとして設置
-         addAnnotation(shopData:  shopDataArray)
-    }
     //アノテーション（ピン）がタップされたときに呼ばれる
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //詳細ページへ遷移

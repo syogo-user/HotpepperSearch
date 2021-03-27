@@ -16,8 +16,6 @@
 		911BFED326021AF50094C4B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFED226021AF50094C4B1 /* API.swift */; };
 		911BFEDC260249F80094C4B1 /* SelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFEDA260249F80094C4B1 /* SelectTableViewCell.swift */; };
 		911BFEDD260249F80094C4B1 /* SelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 911BFEDB260249F80094C4B1 /* SelectTableViewCell.xib */; };
-		91318B7625FAF5CE00E3BC0B /* AnalyticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91318B7525FAF5CE00E3BC0B /* AnalyticsModel.swift */; };
-		91318B8225FAF8AD00E3BC0B /* ShopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91318B8125FAF8AD00E3BC0B /* ShopData.swift */; };
 		9134D965260B4D2E002F55DB /* PickerKeyboad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134D964260B4D2E002F55DB /* PickerKeyboad.swift */; };
 		913519472605B90100912C90 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913519462605B90100912C90 /* ShadowView.swift */; };
 		9135195A2605E47800912C90 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913519592605E47800912C90 /* Area.swift */; };
@@ -78,8 +76,6 @@
 		911BFED226021AF50094C4B1 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		911BFEDA260249F80094C4B1 /* SelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTableViewCell.swift; sourceTree = "<group>"; };
 		911BFEDB260249F80094C4B1 /* SelectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTableViewCell.xib; sourceTree = "<group>"; };
-		91318B7525FAF5CE00E3BC0B /* AnalyticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsModel.swift; sourceTree = "<group>"; };
-		91318B8125FAF8AD00E3BC0B /* ShopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopData.swift; sourceTree = "<group>"; };
 		9134D964260B4D2E002F55DB /* PickerKeyboad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboad.swift; sourceTree = "<group>"; };
 		913519462605B90100912C90 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		913519592605E47800912C90 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
@@ -169,8 +165,6 @@
 		91318B7A25FAF5D700E3BC0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				91318B7525FAF5CE00E3BC0B /* AnalyticsModel.swift */,
-				91318B8125FAF8AD00E3BC0B /* ShopData.swift */,
 				913CAFA125FD89EC0044F484 /* SerachCondition.swift */,
 				91BFFB6B2602C5D4009F3638 /* SearchInfo.swift */,
 				91467F11260583A50016D93F /* Shop.swift */,
@@ -537,11 +531,9 @@
 				91467F1A2605A35D0016D93F /* ResultTableViewController.swift in Sources */,
 				911BFECD260219100094C4B1 /* Genre.swift in Sources */,
 				91FB633625FA5B4300F7D342 /* ViewController.swift in Sources */,
-				91318B7625FAF5CE00E3BC0B /* AnalyticsModel.swift in Sources */,
 				91467F12260583A50016D93F /* Shop.swift in Sources */,
 				91FB633225FA5B4300F7D342 /* AppDelegate.swift in Sources */,
 				911BFEC5260217FA0094C4B1 /* SelectViewController.swift in Sources */,
-				91318B8225FAF8AD00E3BC0B /* ShopData.swift in Sources */,
 				914D231E25FE26090036C5B8 /* SearchConditionCell.swift in Sources */,
 				91BFFB6C2602C5D4009F3638 /* SearchInfo.swift in Sources */,
 				9134D965260B4D2E002F55DB /* PickerKeyboad.swift in Sources */,
