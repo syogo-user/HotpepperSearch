@@ -7,8 +7,8 @@
 
 import UIKit
 import SCLAlertView
-
-class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource ,UITextFieldDelegate{
+import SVProgressHUD
+class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
 
     var searchInfoGenleArray = [SearchInfo]()
     var searchInfoAreaArray = [SearchInfo]()
@@ -53,7 +53,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.textField.delegate = self
+//        self.textField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.searchButton.layer.cornerRadius = 15
         self.clearButton.layer.cornerRadius  = 15
@@ -87,7 +87,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.searchButtonSetEnable(text:self.textField.text ?? "")
+//        self.searchButtonSetEnable(text:self.textField.text ?? "")
         self.searchConditionArray = []
         //タイトルと受け取った検索条件を設定
         self.setTitleText()
@@ -97,31 +97,43 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         //キーボードを閉じる
         self.view.endEditing(true)
     }
-    private func searchButtonSetEnable(text:String){
-        if searchInfoGenleArray.count > 0 || searchInfoAreaArray.count > 0 || text != ""{
-            self.searchButton.isEnabled = true//活性
-            self.searchButton.setTitleColor(UIColor.white, for: .normal)
-            self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
-        }else{
-            self.searchButton.isEnabled = false//非活性
-            self.searchButton.setTitleColor(UIColor.lightGray, for: .normal)
-            self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
-        }
-
-    }
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        searchButtonSetEnable(text:textField.text ?? "")
+//    private func searchButtonSetEnable(text:String){
+//        if searchInfoGenleArray.count > 0 || searchInfoAreaArray.count > 0 || text != ""{
+//            self.searchButton.isEnabled = true//活性
+//            self.searchButton.setTitleColor(UIColor.white, for: .normal)
+//            self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
+//        }else{
+//            self.searchButton.isEnabled = false//非活性
+//            self.searchButton.setTitleColor(UIColor.lightGray, for: .normal)
+//            self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+//        }
+//
+//    }
+////    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+////        searchButtonSetEnable(text:textField.text ?? "")
+////        return true
+////    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+////        if string == "" && self.textField.text == ""{
+////             searchButtonSetEnable(text: "")
+////        }else {
+////            searchButtonSetEnable(text:string)
+////        }
+//
+//        var textLength :Int
+//        textLength = (self.textField.text?.count ?? 0 - range.length) + string.count
+//
+//        if textLength > 0{
+//            self.searchButton.isEnabled = true//活性
+//            self.searchButton.setTitleColor(UIColor.white, for: .normal)
+//            self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
+//        }else{
+//            self.searchButton.isEnabled = false//非活性
+//            self.searchButton.setTitleColor(UIColor.lightGray, for: .normal)
+//            self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+//        }
 //        return true
 //    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if string == "" && self.textField.text == ""{
-//             searchButtonSetEnable(text: "")
-//        }else {
-//            searchButtonSetEnable(text:string)
-//        }
-
-        return true
-    }
 
 
     
@@ -192,9 +204,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         default:
             break
         }
-
-        
-        
     }
     private func setTitleText(){
         for i in 0 ..< 2{
@@ -263,15 +272,18 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         self.searchInfoGenleArray = []
         self.searchConditionArray = []
         setTitleText()
-        //ボタンを非選択状態にする
-        
-        
-        
         tableView.reloadData()
     }
     
     //検索ボタン押下時
     @IBAction func searchTap(_ sender: Any) {
+        SVProgressHUD.show()
+        if !self.validateCheck() {
+            SVProgressHUD.dismiss()
+            SCLAlertView().showInfo("検索条件が設定されていません。", subTitle: "キーワード、エリア、ジャンルのどれかを選択してください。", closeButtonTitle: "OK", colorStyle: 0xC1272D)
+            return
+        }
+        
         var params = [String:Any]()
         
         //エリア(小)
@@ -319,14 +331,23 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
                 print("items.name:",items.name + "items.budget.name:",items.budget.name + "items.address:",items.address)
             }
             if items.results.shop.count == 0{
+                SVProgressHUD.dismiss()
                 SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK", colorStyle: 0xC1272D)
                 return
             }
             self.shopDataArray = items.results.shop
             //条件設定画面に遷移
             self.performSegue(withIdentifier:self.segueId2 , sender: nil)
+            SVProgressHUD.dismiss()
         }
         
+    }
+    private func validateCheck() -> Bool{
+        if searchInfoGenleArray.count ==  0 && searchInfoAreaArray.count == 0 && self.textField.text == ""{
+            return false
+        } else {
+            return true
+        }
     }
 
 }

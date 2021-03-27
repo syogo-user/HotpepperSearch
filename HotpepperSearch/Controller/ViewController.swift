@@ -7,8 +7,8 @@
 
 import UIKit
 import MapKit
-import Lottie
 import SCLAlertView
+import SVProgressHUD
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate ,UITextFieldDelegate{
 
     
@@ -17,7 +17,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailSearchButton: UIButton!
     
-    var animationView = AnimationView()
+//    var animationView = AnimationView()
     let locationManager = CLLocationManager()
     var latitude = Double()
     var longitude = Double()
@@ -43,22 +43,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力（例：居酒屋）", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
         self.detailSearchButton.layer.cornerRadius = 20
         self.detailSearchButton.addTarget(self, action: #selector(detailSearch), for: .touchUpInside)
+        self.detailSearchButton.layer.shadowOffset = CGSize(width: 5, height: 5)//影の方向　右下
+        self.detailSearchButton.layer.shadowRadius = 2// 影のぼかし量
+        self.detailSearchButton.layer.shadowOpacity =  0.2 // 影の濃さ
     }
     @objc private func dismissKeyborad(){
         //キーボードを閉じる
         self.view.endEditing(true)
     }
     //Lottieを表示する
-    private func startLoad(){
-        animationView = AnimationView()
-        let animation = Animation.named("load")
-        animationView.frame = view.bounds
-        animationView.animation = animation
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
-        view.addSubview(animationView)
-        animationView.play()
-    }
+//    private func startLoad(){
+//        animationView = AnimationView()
+//        let animation = Animation.named("load")
+//        animationView.frame = view.bounds
+//        animationView.animation = animation
+//        animationView.contentMode = .scaleAspectFit
+//        animationView.loopMode = .loop
+//        view.addSubview(animationView)
+//        animationView.play()
+//    }
     //位置情報を取得してよいか判定
     private func startUpdatingLocation(){
         locationManager .requestAlwaysAuthorization()
@@ -114,6 +117,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
 
     @IBAction func search(_ sender: Any) {
+        if !validateCheck(){
+            SCLAlertView().showInfo("検索条件が設定されていません。", subTitle: "キーワードを入力してください。", closeButtonTitle: "OK", colorStyle: 0xC1272D)
+            return
+        }
         //検索処理
         textSearch()
     }
@@ -121,12 +128,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @objc private func detailSearch(){
         performSegue(withIdentifier: "detailSearchVC", sender: nil)
     }
-    
+    private func validateCheck() -> Bool{
+        if self.textField.text == ""{
+            return false
+        } else {
+            return true
+        }
+    }
     private func textSearch(){
         //textFieldを閉じる
         textField.resignFirstResponder()
         //ローディングを行う
-//        startLoad()
+        SVProgressHUD.show()
         
         
         //textFieldの文字、didUpdateLocationsで取得した緯度、経度とAPIキーを用いてURLを作成
@@ -141,6 +154,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             self.shopDataArray = items.results.shop
             self.totalHitCount = items.results.results_available
             self.addAnnotation(shopData:self.shopDataArray)
+            SVProgressHUD.dismiss()
         }
 //        //通信を行う
 //        let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
@@ -164,6 +178,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if totalHitCount == 0{
             SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK",colorStyle: 0xC1272D)
         }else{
+            if totalHitCount > 100{
+                totalHitCount = 100
+            }
+            
             for i in 0...totalHitCount - 1{
                 annotation = MKPointAnnotation()
                 //緯度、経度を設定

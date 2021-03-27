@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-
+import SVProgressHUD
 class API{
     enum PathType:String{
         case gourmet
@@ -44,6 +44,7 @@ class API{
                     completion(value)
                 }catch{
                     print("変換に失敗しました。：",error)
+                    SVProgressHUD.dismiss()
                 }
 
             }

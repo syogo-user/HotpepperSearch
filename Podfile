@@ -8,9 +8,9 @@ target 'HotpepperSearch' do
   # Pods for HotpepperSearch
    pod 'SwiftyJSON', '~> 4.0'
    pod 'Alamofire', '~> 5.2'
-   pod 'lottie-ios'
    pod 'SCLAlertView'
    pod 'Nuke'
+   pod 'SVProgressHUD','2.2.5'
    
   target 'HotpepperSearchTests' do
     inherit! :search_paths
