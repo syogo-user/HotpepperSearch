@@ -8,7 +8,7 @@
 import UIKit
 import SCLAlertView
 
-class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource ,UITextFieldDelegate{
 
     var searchInfoGenleArray = [SearchInfo]()
     var searchInfoAreaArray = [SearchInfo]()
@@ -36,7 +36,8 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var textField: SearchTextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-        
+    @IBOutlet weak var clearButton: UIButton!
+    
     enum actionTag:Int{
         case action1 = 0
         case action2 = 1
@@ -49,21 +50,26 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "詳細検索"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.textField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.searchButton.layer.cornerRadius = 15
+        self.clearButton.layer.cornerRadius  = 15
+        self.clearButton.layer.borderWidth = 0.3
         self.textField.layer.cornerRadius = 15
         self.textField.borderStyle = .none
         self.textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth  = 1
+        self.textField.layer.borderWidth  = 1
         self.textField.layer.masksToBounds = true
         self.tableView.isScrollEnabled = false
-        textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
-//        textField.leftViewMode = .always
-//        let imageView = UIImageView(frame:CGRect(x: 40, y:0 , width: 0, height: 40))
-//        imageView.image = UIImage(named: "search")
-//        textField.leftView?.addSubview(imageView)
+        self.textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+
+        
+        let gesture = UITapGestureRecognizer(target:self,action: #selector(dismissKeyborad))
+        gesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(gesture)
 
         //カスタムセルを設定
         let nib = UINib(nibName: "SearchConditionCell", bundle: nil)
@@ -81,15 +87,18 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.searchButtonSetEnable()
+        self.searchButtonSetEnable(text:self.textField.text ?? "")
         self.searchConditionArray = []
         //タイトルと受け取った検索条件を設定
         self.setTitleText()
         tableView.reloadData()
     }
-    private func searchButtonSetEnable(){
-        if searchInfoGenleArray.count > 0 || searchInfoAreaArray.count > 0{
+    @objc private func dismissKeyborad(){
+        //キーボードを閉じる
+        self.view.endEditing(true)
+    }
+    private func searchButtonSetEnable(text:String){
+        if searchInfoGenleArray.count > 0 || searchInfoAreaArray.count > 0 || text != ""{
             self.searchButton.isEnabled = true//活性
             self.searchButton.setTitleColor(UIColor.white, for: .normal)
             self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
@@ -99,9 +108,23 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
         }
 
-        
-        
     }
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        searchButtonSetEnable(text:textField.text ?? "")
+//        return true
+//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if string == "" && self.textField.text == ""{
+//             searchButtonSetEnable(text: "")
+//        }else {
+//            searchButtonSetEnable(text:string)
+//        }
+
+        return true
+    }
+
+
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -231,7 +254,21 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }
     }
-    
+    //クリアボタン押下時
+    @IBAction func clearTap(_ sender: Any) {
+        //キーワードをクリア
+        self.textField.text = ""
+        
+        self.searchInfoAreaArray = []
+        self.searchInfoGenleArray = []
+        self.searchConditionArray = []
+        setTitleText()
+        //ボタンを非選択状態にする
+        
+        
+        
+        tableView.reloadData()
+    }
     
     //検索ボタン押下時
     @IBAction func searchTap(_ sender: Any) {

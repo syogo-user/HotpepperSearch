@@ -146,7 +146,7 @@
                                 </constraints>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5v-QZ-xoC">
-                                <rect key="frame" x="92" y="728" width="230" height="45"/>
+                                <rect key="frame" x="164" y="728" width="230" height="45"/>
                                 <color key="backgroundColor" red="0.90588235289999997" green="0.21960784310000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="bG8-W4-6t5"/>
@@ -234,6 +234,18 @@
                                     <constraint firstAttribute="height" constant="50" id="tT9-QR-jqK"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUv-fC-gmK">
+                                <rect key="frame" x="20" y="728" width="124" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="fj3-05-NGP"/>
+                                </constraints>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="クリア"/>
+                                <connections>
+                                    <action selector="clearTap:" destination="mMN-oY-vRW" eventType="touchUpInside" id="WHW-7u-4Eu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8P0-uq-NS0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -243,20 +255,25 @@
                             <constraint firstItem="j0k-4E-QoF" firstAttribute="top" secondItem="J7E-BN-YMw" secondAttribute="bottom" constant="20" id="7o0-4L-srI"/>
                             <constraint firstItem="8gt-Ef-4Rl" firstAttribute="top" secondItem="MZJ-Ei-LYq" secondAttribute="bottom" constant="20" id="8ZG-T6-zX3"/>
                             <constraint firstItem="8P0-uq-NS0" firstAttribute="bottom" secondItem="L5v-QZ-xoC" secondAttribute="bottom" constant="35" id="ADB-Ox-LWP"/>
+                            <constraint firstItem="8P0-uq-NS0" firstAttribute="trailing" secondItem="L5v-QZ-xoC" secondAttribute="trailing" constant="20" id="NkV-bi-uus"/>
+                            <constraint firstItem="L5v-QZ-xoC" firstAttribute="leading" secondItem="tUv-fC-gmK" secondAttribute="trailing" constant="20" id="SNm-ad-y9b"/>
                             <constraint firstItem="J7E-BN-YMw" firstAttribute="centerX" secondItem="48s-Cv-agL" secondAttribute="centerX" id="ULd-R7-Q3Z"/>
-                            <constraint firstItem="L5v-QZ-xoC" firstAttribute="centerX" secondItem="48s-Cv-agL" secondAttribute="centerX" id="VLC-kZ-86k"/>
+                            <constraint firstItem="L5v-QZ-xoC" firstAttribute="top" secondItem="tUv-fC-gmK" secondAttribute="top" id="a56-Of-ygq"/>
                             <constraint firstItem="MZJ-Ei-LYq" firstAttribute="top" secondItem="j0k-4E-QoF" secondAttribute="bottom" constant="10" id="cIq-yx-u3a"/>
                             <constraint firstItem="MZJ-Ei-LYq" firstAttribute="leading" secondItem="8P0-uq-NS0" secondAttribute="leading" constant="30" id="gCt-ca-PGV"/>
                             <constraint firstItem="J7E-BN-YMw" firstAttribute="top" secondItem="8P0-uq-NS0" secondAttribute="top" constant="50" id="iz0-zg-1lT"/>
                             <constraint firstItem="8gt-Ef-4Rl" firstAttribute="leading" secondItem="8P0-uq-NS0" secondAttribute="leading" constant="40" id="jY8-eg-XmQ"/>
+                            <constraint firstItem="L5v-QZ-xoC" firstAttribute="bottom" secondItem="tUv-fC-gmK" secondAttribute="bottom" id="jwL-Br-4oc"/>
                             <constraint firstItem="8P0-uq-NS0" firstAttribute="trailing" secondItem="8gt-Ef-4Rl" secondAttribute="trailing" constant="40" id="lVR-3C-zyY"/>
                             <constraint firstItem="J7E-BN-YMw" firstAttribute="leading" secondItem="8P0-uq-NS0" secondAttribute="leading" constant="15" id="mog-tH-kuN"/>
+                            <constraint firstItem="tUv-fC-gmK" firstAttribute="leading" secondItem="8P0-uq-NS0" secondAttribute="leading" constant="20" id="vBd-ZX-1dJ"/>
                             <constraint firstItem="j0k-4E-QoF" firstAttribute="leading" secondItem="8P0-uq-NS0" secondAttribute="leading" id="wiA-x6-PQq"/>
                             <constraint firstItem="8P0-uq-NS0" firstAttribute="trailing" secondItem="MZJ-Ei-LYq" secondAttribute="trailing" constant="30" id="z0B-6p-bKe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U0q-q4-bFa"/>
                     <connections>
+                        <outlet property="clearButton" destination="tUv-fC-gmK" id="Mdf-jW-twE"/>
                         <outlet property="courseButton" destination="2ac-5T-iAm" id="LZw-uf-Gdh"/>
                         <outlet property="kotatsuButton" destination="Ng9-jM-Qto" id="Twf-gB-ucK"/>
                         <outlet property="noSmokingButton" destination="ylA-QA-EOX" id="FNy-CQ-qni"/>

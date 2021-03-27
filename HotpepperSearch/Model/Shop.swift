@@ -21,6 +21,11 @@ class Shop:Decodable{
     let photo :Photo
     let urls :URLS
     let free_drink :String
+    let free_food :String
+    let private_room:String
+    let non_smoking:String
+    let horigotatsu :String
+    let course:String
 }
 //料金
 class Budget:Decodable{
