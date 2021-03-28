@@ -63,7 +63,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         self.tableView.delegate = self
         self.tableView.dataSource = self
-//        self.textField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.searchButton.layer.cornerRadius = 15
         self.clearButton.layer.cornerRadius  = 15
@@ -97,7 +96,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     override func viewWillAppear(_ animated: Bool) {
-//        self.searchButtonSetEnable(text:self.textField.text ?? "")
         self.searchConditionArray = []
         //タイトルと受け取った検索条件を設定
         self.setTitleText()
@@ -107,43 +105,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         //キーボードを閉じる
         self.view.endEditing(true)
     }
-//    private func searchButtonSetEnable(text:String){
-//        if searchInfoGenleArray.count > 0 || searchInfoAreaArray.count > 0 || text != ""{
-//            self.searchButton.isEnabled = true//活性
-//            self.searchButton.setTitleColor(UIColor.white, for: .normal)
-//            self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
-//        }else{
-//            self.searchButton.isEnabled = false//非活性
-//            self.searchButton.setTitleColor(UIColor.lightGray, for: .normal)
-//            self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
-//        }
-//
-//    }
-////    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-////        searchButtonSetEnable(text:textField.text ?? "")
-////        return true
-////    }
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-////        if string == "" && self.textField.text == ""{
-////             searchButtonSetEnable(text: "")
-////        }else {
-////            searchButtonSetEnable(text:string)
-////        }
-//
-//        var textLength :Int
-//        textLength = (self.textField.text?.count ?? 0 - range.length) + string.count
-//
-//        if textLength > 0{
-//            self.searchButton.isEnabled = true//活性
-//            self.searchButton.setTitleColor(UIColor.white, for: .normal)
-//            self.searchButton.backgroundColor = UIColor(red: 215/255, green: 56/255, blue: 32/255, alpha: 1)
-//        }else{
-//            self.searchButton.isEnabled = false//非活性
-//            self.searchButton.setTitleColor(UIColor.lightGray, for: .normal)
-//            self.searchButton.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
-//        }
-//        return true
-//    }
 
 
     

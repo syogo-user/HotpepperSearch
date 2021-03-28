@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,27 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hotpper " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7e-h9-NmI">
-                                <rect key="frame" x="80" y="244" width="294" height="142"/>
-                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="42"/>
-                                <color key="textColor" systemColor="systemOrangeColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QE-a9-Dha">
-                                <rect key="frame" x="178" y="381" width="156" height="142"/>
-                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="42"/>
-                                <color key="textColor" systemColor="systemOrangeColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hotpepperSearchText" translatesAutoresizingMaskIntoConstraints="NO" id="qOT-od-38Q">
+                                <rect key="frame" x="20" y="244" width="374" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="umT-ei-6YZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.90588235289999997" green="0.21960784310000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4QE-a9-Dha" secondAttribute="trailing" constant="80" id="KMe-30-9zk"/>
-                            <constraint firstItem="z7e-h9-NmI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="QZF-aW-ow3"/>
-                            <constraint firstItem="4QE-a9-Dha" firstAttribute="top" secondItem="z7e-h9-NmI" secondAttribute="bottom" constant="-5" id="Tku-aY-sa3"/>
-                            <constraint firstItem="z7e-h9-NmI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="bgJ-dj-PNh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="z7e-h9-NmI" secondAttribute="trailing" constant="40" id="m1P-Ey-4uU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qOT-od-38Q" secondAttribute="trailing" constant="20" id="FC7-3y-8er"/>
+                            <constraint firstItem="qOT-od-38Q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="Pd8-uL-Cat"/>
+                            <constraint firstItem="qOT-od-38Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="yaC-a1-0v6"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,8 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="hotpepperSearchText" width="873" height="516"/>
     </resources>
 </document>

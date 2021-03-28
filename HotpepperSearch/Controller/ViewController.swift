@@ -17,7 +17,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailSearchButton: UIButton!
     
-//    var animationView = AnimationView()
     let locationManager = CLLocationManager()
     var latitude = Double()
     var longitude = Double()
@@ -51,17 +50,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //キーボードを閉じる
         self.view.endEditing(true)
     }
-    //Lottieを表示する
-//    private func startLoad(){
-//        animationView = AnimationView()
-//        let animation = Animation.named("load")
-//        animationView.frame = view.bounds
-//        animationView.animation = animation
-//        animationView.contentMode = .scaleAspectFit
-//        animationView.loopMode = .loop
-//        view.addSubview(animationView)
-//        animationView.play()
-//    }
     //位置情報を取得してよいか判定
     private func startUpdatingLocation(){
         locationManager .requestAlwaysAuthorization()
@@ -140,38 +128,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         textField.resignFirstResponder()
         //ローディングを行う
         SVProgressHUD.show()
-        
-        
-        //textFieldの文字、didUpdateLocationsで取得した緯度、経度とAPIキーを用いてURLを作成
-//        let urlString = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=\(apikey)&lat=\(latitude)&lng=\(longitude)&range=5&count=50&format=json&keyword=\(textField.text!)"
+
         let params = [
             "lat":latitude,
             "lng":longitude,
             "keyword":textField.text ?? ""
         ] as [String:Any]
         API.shared.request(path: .gourmet, params: params, type: ShopItems.self) { (items) in
-//            self.animationView.removeFromSuperview()//アニメーションを閉じる
             self.shopDataArray = items.results.shop
             self.totalHitCount = items.results.results_available
             self.addAnnotation(shopData:self.shopDataArray)
             SVProgressHUD.dismiss()
         }
-//        //通信を行う
-//        let analyticsModel = AnalyticsModel(latitude: latitude, longitude: longitude, url: urlString)
-//        analyticsModel.doneCatchDataProtcol = self //自分に処理を委任する
-//        analyticsModel.setData()
+
         
         
     }
-//    func catchData(arrayData: Array<ShopData>, resultCount: Int) {
-//        //arrayData,resultCount
-////        animationView.removeFromSuperview()//アニメーションを閉じる
-////        shopDataArray = arrayData
-////        totalHitCount = resultCount
-//
-//        //shopDataArrayの中身を取り出して、annotationとして設置
-////         addAnnotation(shopData:  shopDataArray)
-//    }
     private func addAnnotation(shopData :[Shop]){
         removeArray()
 
