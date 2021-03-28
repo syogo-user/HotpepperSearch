@@ -38,6 +38,16 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var clearButton: UIButton!
     
+    enum detaileItemName:String{
+        case nomi
+        case tabe
+        case privateRoom
+        case noSmoking
+        case kotatsu
+        case course
+    }
+    
+    
     enum actionTag:Int{
         case action1 = 0
         case action2 = 1
@@ -239,17 +249,17 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             if let tag = actionTag(rawValue: button.tag){
                 switch tag {
                 case .action1:
-                    dicName = "nomi"
+                    dicName = detaileItemName.nomi.rawValue
                 case .action2:
-                    dicName = "tabe"
+                    dicName = detaileItemName.tabe.rawValue
                 case .action3:
-                    dicName = "privateRoom"
+                    dicName = detaileItemName.privateRoom.rawValue
                 case .action4:
-                    dicName = "noSmoking"
+                    dicName = detaileItemName.noSmoking.rawValue
                 case .action5:
-                    dicName = "kotatsu"
+                    dicName = detaileItemName.kotatsu.rawValue
                 case .action6:
-                    dicName = "course"
+                    dicName = detaileItemName.course.rawValue
                 }
                 button.switchAction(onAction: {
                     //選択状態の場合
@@ -271,6 +281,19 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         self.searchInfoAreaArray = []
         self.searchInfoGenleArray = []
         self.searchConditionArray = []
+        self.buttonSelectCheckDic[detaileItemName.nomi.rawValue] = false
+        self.buttonSelectCheckDic[detaileItemName.tabe.rawValue] = false
+        self.buttonSelectCheckDic[detaileItemName.privateRoom.rawValue] = false
+        self.buttonSelectCheckDic[detaileItemName.noSmoking.rawValue] = false
+        self.buttonSelectCheckDic[detaileItemName.kotatsu.rawValue] = false
+        self.buttonSelectCheckDic[detaileItemName.course.rawValue] = false        
+        self.nomiButton.backgroundColor = .clear
+        self.tabeButton.backgroundColor = .clear
+        self.privateRoomButton.backgroundColor = .clear
+        self.noSmokingButton.backgroundColor = .clear
+        self.kotatsuButton.backgroundColor = .clear
+        self.courseButton.backgroundColor = .clear
+        
         setTitleText()
         tableView.reloadData()
     }

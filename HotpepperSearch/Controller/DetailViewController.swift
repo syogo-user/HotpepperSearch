@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let requesturl  = URL(string: url) else { return}
-        //戻るボタンの戻るの文字を削除
+//        戻るボタンの戻るの文字を削除
         self.navigationController?.navigationBar.topItem?.title = ""
         let request = URLRequest(url:requesturl)
         webView.load(request)        
