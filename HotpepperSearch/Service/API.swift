@@ -24,7 +24,8 @@ class API{
         let path = path.rawValue //Stringに変換
         let url = baseUrl  + path + "/v1/" + "?"
         var params = params
-        params["key"] = "834159f2a4601857"
+//        params["key"] = "834159f2a4601857"
+        params["key"] = fooAccessToken
         params["count"] = 100
         params["format"] = "json"
 
