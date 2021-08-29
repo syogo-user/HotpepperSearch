@@ -29,7 +29,6 @@
 		91467F212605A4FE0016D93F /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91467F1F2605A4FE0016D93F /* ResultTableViewCell.xib */; };
 		914A39B426064FA500846727 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914A39B326064FA500846727 /* Button.swift */; };
 		914D231E25FE26090036C5B8 /* SearchConditionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D231D25FE26090036C5B8 /* SearchConditionCell.swift */; };
-		917E7C7926DA18030026519C /* AccessTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917E7C7826DA18030026519C /* AccessTokens.swift */; };
 		91BFFB6C2602C5D4009F3638 /* SearchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFFB6B2602C5D4009F3638 /* SearchInfo.swift */; };
 		91D5ADC12605FD5700F89BBD /* SelectAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D5ADBF2605FD5700F89BBD /* SelectAreaTableViewCell.swift */; };
 		91D5ADC22605FD5700F89BBD /* SelectAreaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91D5ADC02605FD5700F89BBD /* SelectAreaTableViewCell.xib */; };
@@ -90,7 +89,6 @@
 		91467F1F2605A4FE0016D93F /* ResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
 		914A39B326064FA500846727 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		914D231D25FE26090036C5B8 /* SearchConditionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConditionCell.swift; sourceTree = "<group>"; };
-		917E7C7826DA18030026519C /* AccessTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokens.swift; sourceTree = "<group>"; };
 		91BFFB6B2602C5D4009F3638 /* SearchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfo.swift; sourceTree = "<group>"; };
 		91D5ADBF2605FD5700F89BBD /* SelectAreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAreaTableViewCell.swift; sourceTree = "<group>"; };
 		91D5ADC02605FD5700F89BBD /* SelectAreaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAreaTableViewCell.xib; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 				910215DE25FCC8070078B4CC /* load.json */,
 				914A39B326064FA500846727 /* Button.swift */,
 				9134D964260B4D2E002F55DB /* PickerKeyboad.swift */,
-				917E7C7826DA18030026519C /* AccessTokens.swift */,
 			);
 			path = HotpepperSearch;
 			sourceTree = "<group>";
@@ -548,7 +545,6 @@
 				91FB633425FA5B4300F7D342 /* SceneDelegate.swift in Sources */,
 				913519652605F8EB00912C90 /* SelectAreaViewController.swift in Sources */,
 				911BFED326021AF50094C4B1 /* API.swift in Sources */,
-				917E7C7926DA18030026519C /* AccessTokens.swift in Sources */,
 				911BFEDC260249F80094C4B1 /* SelectTableViewCell.swift in Sources */,
 				91FB636825FA5C6000F7D342 /* DetailViewController.swift in Sources */,
 				914A39B426064FA500846727 /* Button.swift in Sources */,
