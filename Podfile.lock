@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (5.6.4)
+  - Nuke (10.7.1)
+  - SCLAlertView (0.8)
+  - SVProgressHUD (2.2.5)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - Nuke
+  - SCLAlertView
+  - SVProgressHUD (= 2.2.5)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Nuke
+    - SCLAlertView
+    - SVProgressHUD
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: 524be4893914cf846f4884541130ce37770425fc
+
+COCOAPODS: 1.10.2

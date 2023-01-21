@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SearchInfo :NSObject {
+class SearchInfo: NSObject {
     let id: String
     let name: String
     var check: Bool = false
