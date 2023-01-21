@@ -7,8 +7,8 @@
 
 import UIKit
 import Nuke
-class ResultTableViewCell: UITableViewCell{
 
+class ResultTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var shopName: UILabel!
@@ -30,92 +30,86 @@ class ResultTableViewCell: UITableViewCell{
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        
     }
-    func setData(_ shop:Shop){
+    
+    func setData(_ shop: Shop) {
         self.shopName.text = shop.name
         self.shopCatch.text =  shop.catch
         self.address.text = shop.address
         self.budget.text = shop.budget.name
         
         //画像の表示
-        if let url = URL(string: shop.photo.mobile.l){
+        if let url = URL(string: shop.photo.mobile.l) {
             Nuke.loadImage(with: url, into: imageView1)
         }
         
         setImageIcon(shop)
     }
-    private func setImageIcon(_ shop:Shop){
+    
+    private func setImageIcon(_ shop: Shop) {
         //飲み放題
-        if shop.free_drink.count == 0{
+        if shop.free_drink.count == 0 {
             self.nomiImage.image = UIImage(named: "nomiEnable")
-        } else{
-            if shop.free_drink.hasPrefix("あり")  {
+        } else {
+            if shop.free_drink.hasPrefix("あり") {
                 self.nomiImage.image = UIImage(named: "nomi")
-            }else{
+            } else {
                 self.nomiImage.image = UIImage(named: "nomiEnable")
             }
         }
         //食べ放題
-        if shop.free_food.count == 0{
+        if shop.free_food.count == 0 {
             self.tabeImage.image = UIImage(named: "tabeEnable")
-        } else{
-            if shop.free_food.hasPrefix("あり")  {
+        } else {
+            if shop.free_food.hasPrefix("あり") {
                 self.tabeImage.image = UIImage(named: "tabe")
-            }else{
+            } else {
                 self.tabeImage.image = UIImage(named: "tabeEnable")
             }
         }
         
         //個室
-        if shop.private_room.count == 0{
+        if shop.private_room.count == 0 {
             self.privateRoomImage.image = UIImage(named: "privateRoomEnable")
-        } else{
-            if shop.private_room.hasPrefix("あり")  {
+        } else {
+            if shop.private_room.hasPrefix("あり") {
                 self.privateRoomImage.image = UIImage(named: "privateRoom")
-            }else{
+            } else {
                 self.privateRoomImage.image = UIImage(named: "privateRoomEnable")
             }
         }
         
         //禁煙
-        if shop.non_smoking.count == 0{
+        if shop.non_smoking.count == 0 {
             self.noSmorkingImage.image = UIImage(named: "noSmorkingEnable")
-        } else{
-            if shop.non_smoking.hasPrefix("全面禁煙") ||  shop.non_smoking.hasPrefix("一部禁煙")  {
+        } else {
+            if shop.non_smoking.hasPrefix("全面禁煙") || shop.non_smoking.hasPrefix("一部禁煙") {
                 self.noSmorkingImage.image = UIImage(named: "noSmorking")
-            }else{
+            } else {
                 self.noSmorkingImage.image = UIImage(named: "noSmorkingEnable")
             }
         }
         
         //掘りごたつ
-        if shop.horigotatsu.count == 0{
+        if shop.horigotatsu.count == 0 {
             self.kotatsuImage.image = UIImage(named: "kotatsuEnable")
-        } else{
-            if shop.horigotatsu.hasPrefix("あり")  {
+        } else {
+            if shop.horigotatsu.hasPrefix("あり") {
                 self.kotatsuImage.image = UIImage(named: "kotatsu")
-            }else{
+            } else {
                 self.kotatsuImage.image = UIImage(named: "kotatsuEnable")
             }
         }
         
         //コース
-        if shop.course.count == 0{
+        if shop.course.count == 0 {
             self.courseImage.image = UIImage(named: "courseEnable")
-        } else{
-            if shop.course.hasPrefix("あり")  {
+        } else {
+            if shop.course.hasPrefix("あり") {
                 self.courseImage.image = UIImage(named: "course")
-            }else{
+            } else {
                 self.courseImage.image = UIImage(named: "courseEnable")
             }
         }
-        
-        
-        
-        
     }
-    
-    
 }

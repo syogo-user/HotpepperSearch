@@ -8,7 +8,8 @@
 import UIKit
 import SCLAlertView
 import SVProgressHUD
-class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+
+class DetailSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var searchInfoGenleArray = [SearchInfo]()
     var searchInfoAreaArray = [SearchInfo]()
@@ -24,7 +25,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     private let segueId2 = "resultVC"
     private let segueId3 = "selectAreaVC"
     
-    
     @IBOutlet weak var nomiButton: UIButton!
     @IBOutlet weak var tabeButton: UIButton!
     @IBOutlet weak var privateRoomButton: UIButton!
@@ -32,13 +32,12 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var kotatsuButton: UIButton!
     @IBOutlet weak var courseButton: UIButton!
     
-
     @IBOutlet weak var textField: SearchTextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var clearButton: UIButton!
     
-    enum detaileItemName:String{
+    enum detaileItemName: String {
         case nomi
         case tabe
         case privateRoom
@@ -46,9 +45,8 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         case kotatsu
         case course
     }
-    
-    
-    enum actionTag:Int{
+        
+    enum actionTag: Int {
         case action1 = 0
         case action2 = 1
         case action3 = 2
@@ -73,19 +71,17 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         self.textField.layer.borderWidth  = 1
         self.textField.layer.masksToBounds = true
         self.tableView.isScrollEnabled = false
-        self.textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
-
+        self.textField.attributedPlaceholder = NSAttributedString(string: "キーワードを入力", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
-        let gesture = UITapGestureRecognizer(target:self,action: #selector(dismissKeyborad))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyborad))
         gesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(gesture)
 
         //カスタムセルを設定
         let nib = UINib(nibName: "SearchConditionCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: cellId)
-        
-        
-        let buttonArray :[UIButton] = [nomiButton,tabeButton,privateRoomButton,noSmokingButton,kotatsuButton,courseButton]
+                
+        let buttonArray: [UIButton] = [nomiButton, tabeButton, privateRoomButton, noSmokingButton, kotatsuButton, courseButton]
         
         buttonArray.forEach { (button) in
             button.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
@@ -93,24 +89,24 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             button.layer.borderWidth = 0.1
             button.layer.borderColor = UIColor.lightGray.cgColor
         }
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.searchConditionArray = []
         //タイトルと受け取った検索条件を設定
         self.setTitleText()
         tableView.reloadData()
     }
-    @objc private func dismissKeyborad(){
+    
+    @objc private func dismissKeyborad() {
         //キーボードを閉じる
         self.view.endEditing(true)
     }
-
-
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchConditionArray.count
     }
@@ -131,8 +127,7 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         fetchItemSearchInfo(index:indexPath.row)
     }
 
-
-    private func fetchItemSearchInfo(index:Int){
+    private func fetchItemSearchInfo(index: Int) {
         let params = [String:String]()
         self.selectIndex = index
         
@@ -164,11 +159,9 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         case segueId1:
             let vc = segue.destination as! SelectViewController
             vc.genreArray = genreArray
-            
         case segueId2:
             let vc = segue.destination as! ResultTableViewController
             vc.shopDataArray = self.shopDataArray
-            
         case segueId3:
             let vc = segue.destination as! SelectAreaViewController
             vc.areaArray = areaArray
@@ -176,8 +169,9 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             break
         }
     }
-    private func setTitleText(){
-        for i in 0 ..< 2{
+    
+    private func setTitleText() {
+        for i in 0 ..< 2 {
             var imageName = ""
             var conditionValue = ""
             var title = ""
@@ -194,7 +188,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
                 self.searchInfoGenleArray.forEach({ (item) in
                     conditionValue = conditionValue  + item.name + ","
                 })
-                
             default:
                 title = ""
             }
@@ -204,10 +197,10 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
         }
     }
     
-    @objc func tapButton(_ sender :Any){
-        if let button = sender as? UIButton{
+    @objc func tapButton(_ sender: Any) {
+        if let button = sender as? UIButton {
             var dicName = ""
-            if let tag = actionTag(rawValue: button.tag){
+            if let tag = actionTag(rawValue: button.tag) {
                 switch tag {
                 case .action1:
                     dicName = detaileItemName.nomi.rawValue
@@ -230,10 +223,10 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
                     button.backgroundColor = .clear
                     self.buttonSelectCheckDic[dicName] = false
                 }
-                
             }
         }
     }
+    
     //クリアボタン押下時
     @IBAction func clearTap(_ sender: Any) {
         //キーワードをクリア
@@ -289,7 +282,6 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             params["genre"] = genleCode
         }
         
-        
         //飲み放題
         params["free_drink"] = self.buttonSelectCheckDic["nomi"] ?? false ? 1 : 0 //trueのとき1
         //食べ放題
@@ -309,12 +301,12 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             params["keyword"] = keyword
         }
         
-        API.shared.request(path: .gourmet, params: params, type:ShopItems.self ) { (items) in
+        API.shared.request(path: .gourmet, params: params, type:ShopItems.self) { (items) in
             //戻ってきたときに呼ばれる
             items.results.shop.forEach { (items) in
                 print("items.name:",items.name + "items.budget.name:",items.budget.name + "items.address:",items.address)
             }
-            if items.results.shop.count == 0{
+            if items.results.shop.count == 0 {
                 SVProgressHUD.dismiss()
                 SCLAlertView().showInfo("検索結果は0件です", subTitle: "条件を変更してください", closeButtonTitle: "OK", colorStyle: 0xC1272D)
                 return
@@ -324,14 +316,13 @@ class DetailSearchViewController: UIViewController,UITableViewDelegate,UITableVi
             self.performSegue(withIdentifier:self.segueId2 , sender: nil)
             SVProgressHUD.dismiss()
         }
-        
     }
-    private func validateCheck() -> Bool{
+    
+    private func validateCheck() -> Bool {
         if searchInfoGenleArray.count ==  0 && searchInfoAreaArray.count == 0 && self.textField.text == ""{
             return false
         } else {
             return true
         }
     }
-
 }

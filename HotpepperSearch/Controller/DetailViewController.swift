@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
@@ -16,11 +17,9 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let requesturl  = URL(string: url) else { return}
-//        戻るボタンの戻るの文字を削除
+        guard let requesturl  = URL(string: url) else { return }
         self.navigationController?.navigationBar.topItem?.title = ""
         let request = URLRequest(url:requesturl)
         webView.load(request)        
     }
-
 }

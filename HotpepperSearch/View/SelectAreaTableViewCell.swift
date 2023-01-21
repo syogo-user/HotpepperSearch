@@ -16,10 +16,9 @@ class SelectAreaTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
-    func setData(_ area:Area){
+    func setData(_ area: Area) {
         self.title.text = area.name
     }
 }

@@ -16,7 +16,6 @@
 		911BFED326021AF50094C4B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFED226021AF50094C4B1 /* API.swift */; };
 		911BFEDC260249F80094C4B1 /* SelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BFEDA260249F80094C4B1 /* SelectTableViewCell.swift */; };
 		911BFEDD260249F80094C4B1 /* SelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 911BFEDB260249F80094C4B1 /* SelectTableViewCell.xib */; };
-		9134D965260B4D2E002F55DB /* PickerKeyboad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134D964260B4D2E002F55DB /* PickerKeyboad.swift */; };
 		913519472605B90100912C90 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913519462605B90100912C90 /* ShadowView.swift */; };
 		9135195A2605E47800912C90 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913519592605E47800912C90 /* Area.swift */; };
 		913519652605F8EB00912C90 /* SelectAreaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913519642605F8EB00912C90 /* SelectAreaViewController.swift */; };
@@ -76,7 +75,6 @@
 		911BFED226021AF50094C4B1 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		911BFEDA260249F80094C4B1 /* SelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTableViewCell.swift; sourceTree = "<group>"; };
 		911BFEDB260249F80094C4B1 /* SelectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTableViewCell.xib; sourceTree = "<group>"; };
-		9134D964260B4D2E002F55DB /* PickerKeyboad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerKeyboad.swift; sourceTree = "<group>"; };
 		913519462605B90100912C90 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		913519592605E47800912C90 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
 		913519642605F8EB00912C90 /* SelectAreaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAreaViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 				91FB633F25FA5B4400F7D342 /* Info.plist */,
 				910215DE25FCC8070078B4CC /* load.json */,
 				914A39B326064FA500846727 /* Button.swift */,
-				9134D964260B4D2E002F55DB /* PickerKeyboad.swift */,
 			);
 			path = HotpepperSearch;
 			sourceTree = "<group>";
@@ -536,7 +533,6 @@
 				911BFEC5260217FA0094C4B1 /* SelectViewController.swift in Sources */,
 				914D231E25FE26090036C5B8 /* SearchConditionCell.swift in Sources */,
 				91BFFB6C2602C5D4009F3638 /* SearchInfo.swift in Sources */,
-				9134D965260B4D2E002F55DB /* PickerKeyboad.swift in Sources */,
 				913CAF9D25FD7E1F0044F484 /* DetailSearchViewController.swift in Sources */,
 				913CAFA225FD89EC0044F484 /* SerachCondition.swift in Sources */,
 				91D5ADC12605FD5700F89BBD /* SelectAreaTableViewCell.swift in Sources */,

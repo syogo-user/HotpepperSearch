@@ -7,12 +7,14 @@
 
 import Foundation
 import UIKit
-class ShadowView :UIView{
+
+class ShadowView: UIView {
     override var bounds: CGRect {
         didSet {
             setupShadow()
         }
     }
+    
     private func setupShadow() {
         self.layer.borderWidth = 0.2
         self.layer.cornerRadius = 25

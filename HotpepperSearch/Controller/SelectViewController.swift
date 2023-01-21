@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var decisionButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -31,6 +31,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return genreArray.count
     }
@@ -43,12 +44,14 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.setSearchInfo(indexPath.row)
         return cell
     }
+    
     //セル選択時
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         searchInfoArray[indexPath.row].setCheckState(check: true)
         cell?.accessoryType = .checkmark //チェック選択
     }
+    
     //セル選択解除時
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
@@ -57,7 +60,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
         
     //検索条件に設定
-    private func setSearchInfo(_ index :Int){
+    private func setSearchInfo(_ index: Int) {
         let searchInfo = SearchInfo(id: genreArray[index].code, name: genreArray[index].name, check: false)
         self.searchInfoArray.append(searchInfo)
     }
@@ -73,9 +76,5 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
         //前の画面に画面遷移する
         self.navigationController?.popViewController(animated: true)
-        
     }
-    
-    
-    
 }

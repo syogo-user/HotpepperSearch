@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+
 extension UIButton {
 
     func switchAction(onAction: @escaping ()->Void, offAction: @escaping ()->Void) {
@@ -21,6 +22,5 @@ extension UIButton {
             //OFFにする時に走らせたい処理
             offAction()
         }
-
     }
 }

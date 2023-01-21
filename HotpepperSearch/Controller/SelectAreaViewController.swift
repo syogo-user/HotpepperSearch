@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+
 class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    enum AreaState:Int{
+    enum AreaState: Int {
         case largeArea = 0
         case middleArea = 1
         case smallArea = 2
@@ -31,11 +32,11 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
         let nib = UINib(nibName: "SelectAreaTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellId)
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return areaArray.count
     }
@@ -48,17 +49,18 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
             //決定ボタンの表示
             self.decisionButton.isHidden = false
             self.decisionButton.layer.cornerRadius = 15
-        }else {
+        } else {
             cell.selectionStyle = .default
             //決定ボタンの非表示
             self.decisionButton.isHidden = true
         }
         return cell
     }
+    
     //セル選択時
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //大エリアの場合
-        if areaState == AreaState.largeArea{
+        if areaState == AreaState.largeArea {
             //現在の選択した条件を取得
             let area:Area = Area(code:self.areaArray[indexPath.row].code,name:self.areaArray[indexPath.row].name)
             //大エリアのコードで中エリアを検索
@@ -93,7 +95,7 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
                 self.areaState = AreaState.smallArea
                 
                 //小エリアの情報を配列に設定
-                for index in 0..<self.areaArray.count{
+                for index in 0..<self.areaArray.count {
                     self.setSearchInfo(index)
                 }
                 //複数選択可
@@ -107,10 +109,11 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
             cell?.accessoryType = .checkmark //チェック選択
         }
     }
+    
     //セル選択解除時
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         //小エリアの場合
-        if areaState == AreaState.smallArea{
+        if areaState == AreaState.smallArea {
             let cell = tableView.cellForRow(at: indexPath)
             searchInfoArray[indexPath.row].setCheckState(check: false)
             cell?.accessoryType = .none //チェック解除
@@ -118,10 +121,11 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
     }
         
     //検索条件に設定
-    private func setSearchInfo(_ index :Int){
+    private func setSearchInfo(_ index: Int) {
         let searchInfo = SearchInfo(id: areaArray[index].code, name: areaArray[index].name, check: false)
         self.searchInfoArray.append(searchInfo)
     }
+    
     //決定ボタン押下時
     @IBAction func searchDecision(_ sender: Any) {
         //検索条件を前の画面に渡す
@@ -134,5 +138,4 @@ class SelectAreaViewController: UIViewController,UITableViewDelegate,UITableView
         //ルート(DetailSearchViewController)に画面遷移する
         self.navigationController?.popToViewController(navigationController!.viewControllers[0], animated: true)
     }
-    
 }

@@ -6,20 +6,17 @@
 //
 
 import Foundation
-class Items:Decodable{
-    let results :Results
+
+class Items: Decodable {
+    let results: Results
 
 }
 
-class Results:Decodable{
-    let genre:[Genre]
+class Results: Decodable{
+    let genre: [Genre]
 }
 
-class Genre:Decodable{
-    let code :String
-    let name :String
+class Genre: Decodable {
+    let code: String
+    let name: String
 }
-
-
-
-

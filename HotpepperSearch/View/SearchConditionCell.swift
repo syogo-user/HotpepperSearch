@@ -6,8 +6,8 @@
 //
 
 import UIKit
-class SearchConditionCell: UITableViewCell {
 
+class SearchConditionCell: UITableViewCell {
 
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var title: UILabel!
@@ -18,14 +18,12 @@ class SearchConditionCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-            super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)
     }
     
-    func setData(_ searchCondition :SerachCondition){
+    func setData(_ searchCondition: SerachCondition) {
         self.title.text = searchCondition.title
         self.conditionValue.text = searchCondition.conditionValue ?? ""
         self.iconImageView.image = UIImage(named: searchCondition.imageName)
     }
-    
-
 }

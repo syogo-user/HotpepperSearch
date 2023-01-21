@@ -6,17 +6,19 @@
 //
 
 import Foundation
-class SearchInfo :NSObject{
-    let id :String
-    let name :String
-    var check :Bool = false
+
+class SearchInfo :NSObject {
+    let id: String
+    let name: String
+    var check: Bool = false
     
-    init(id :String,name:String,check:Bool ) {
+    init(id :String ,name: String, check: Bool) {
         self.id = id
         self.name  = name
         self.check = check
     }
-    func setCheckState (check :Bool){
+    
+    func setCheckState (check: Bool) {
         self.check = check
     }
 }
