@@ -17,12 +17,13 @@ class API {
         case middle_area
         case small_area
     }
-    static let shared = API()
     
+    static let shared = API()
     private let baseUrl = "http://webservice.recruit.co.jp/hotpepper/"
-    func request<T:Decodable>(path :PathType,params:[String:Any],type:T.Type,completion:@escaping (T) -> Void) {
+    
+    func request<T:Decodable>(path :PathType,params: [String: Any], type: T.Type, completion: @escaping (T) -> Void) {
         
-        let path = path.rawValue //Stringに変換
+        let path = path.rawValue
         let url = baseUrl  + path + "/v1/" + "?"
         var params = params
         params["key"] = "834159f2a4601857"
@@ -30,19 +31,15 @@ class API {
         params["format"] = "json"
         
         let request = AF.request(url, method: .get, parameters: params)
-        print("url:",url)
         request.responseJSON { (response) in
-            guard let statucCode =  response.response?.statusCode else{ return }
+            guard let statucCode =  response.response?.statusCode else { return }
             if statucCode <= 300 {
                 do{
                     guard let data = response.data else { return }
                     let decorder = JSONDecoder()
-                    //T　ジェネリクス
                     let value = try decorder.decode(T.self, from: data)
-                    
-                    //受け取ったコールバック関数を実行
                     completion(value)
-                }catch{
+                } catch {
                     print("変換に失敗しました。：",error)
                     SVProgressHUD.dismiss()
                 }
@@ -50,6 +47,4 @@ class API {
             }
         }
     }
-    
-    
 }
