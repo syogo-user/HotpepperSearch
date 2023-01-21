@@ -68,8 +68,8 @@ class SelectViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //決定ボタン押下時
     @IBAction func searchDecision(_ sender: Any) {
         //検索条件を前の画面に渡す
-        let nav  = self.navigationController
-        let preVC = nav?.viewControllers[(nav?.viewControllers.count)! - 2] as! DetailSearchViewController
+        guard let nav = self.navigationController else { return }
+        guard let preVC = nav.viewControllers[(nav.viewControllers.count) - 2] as? DetailSearchViewController else { return }
         preVC.searchInfoGenleArray = self.searchInfoArray.filter {
             //チェックがついているものだけを渡す
             $0.check == true
