@@ -10,4 +10,4 @@
     https://github.com/syogo-user/HotpepperSearch.git
 2. 1のフォルダ階層でターミナルを起動します。
 3. ターミナル上で「pod install」コマンドを実行します。
-4. 「TodoApp.xcworkspace」からXcodeを起動します。
+4. 「HotpepperSearch.xcworkspace」からXcodeを起動します。
