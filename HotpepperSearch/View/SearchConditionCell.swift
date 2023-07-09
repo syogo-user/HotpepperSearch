@@ -8,10 +8,9 @@
 import UIKit
 
 class SearchConditionCell: UITableViewCell {
-
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var conditionValue: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
+    @IBOutlet private weak var title: UILabel!
+    @IBOutlet private weak var conditionValue: UILabel!
     
     override class func awakeFromNib() {
         super.awakeFromNib()

@@ -12,7 +12,7 @@ class Items: Decodable {
 
 }
 
-class Results: Decodable{
+class Results: Decodable {
     let genre: [Genre]
 }
 

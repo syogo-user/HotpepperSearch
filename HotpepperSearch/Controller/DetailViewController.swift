@@ -9,17 +9,16 @@ import UIKit
 import WebKit
 
 class DetailViewController: UIViewController {
-
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet private weak var webView: WKWebView!
     
     var url  = String()
     var name = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let requesturl  = URL(string: url) else { return }
+        guard let requestUrl  = URL(string: url) else { return }
         self.navigationController?.navigationBar.topItem?.title = ""
-        let request = URLRequest(url:requesturl)
+        let request = URLRequest(url:requestUrl)
         webView.load(request)        
     }
 }
