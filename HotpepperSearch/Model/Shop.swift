@@ -34,28 +34,28 @@ class Shop: Decodable {
     let lng: Double
 }
 
-//料金
+/// 料金
 class Budget: Decodable {
     let code: String
     let name: String
     let average: String
 }
 
-//ジャンル
-class ShopGenre: Decodable{
+/// ジャンル
+class ShopGenre: Decodable {
     let `catch`: String
     let code : String
     let name: String
 }
 
-class URLS: Decodable{
+class URLS: Decodable {
     let pc: String
 }
 
-class Photo: Decodable{
+class Photo: Decodable {
     let mobile: L
 }
 
-class L : Decodable{
+class L : Decodable {
     let l: String
 }

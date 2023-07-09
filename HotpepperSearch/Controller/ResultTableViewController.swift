@@ -4,14 +4,13 @@
 //
 //  Created by 小野寺祥吾 on 2021/03/20.
 //
-//
+
 import UIKit
 
 class ResultTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     private var url = ""
     var shopDataArray :[Shop] = []
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     private let cellId = "cellId"
     private let seguId = "shopWebVC"
     

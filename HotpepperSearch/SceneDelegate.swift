@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        //SVProgressHUD用に追加
+        // SVProgressHUD用に追加
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window = self.window
     }

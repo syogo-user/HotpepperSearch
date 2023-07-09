@@ -10,14 +10,12 @@ import SCLAlertView
 import SVProgressHUD
 
 class DetailSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
     var searchInfoGenleArray = [SearchInfo]()
     var searchInfoAreaArray = [SearchInfo]()
     private var searchConditionArray :[SerachCondition] = []
     private var genreArray  = [Genre]()
     private var shopDataArray = [Shop]()
-    private var areaArray = [Area]()
-    
+    private var areaArray = [Area]()    
     private var buttonSelectCheckDic = [String:Bool]()
     private var selectIndex = 0
     private let cellId = "CellId"
@@ -25,17 +23,16 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
     private let segueId2 = "resultVC"
     private let segueId3 = "selectAreaVC"
     
-    @IBOutlet weak var nomiButton: UIButton!
-    @IBOutlet weak var tabeButton: UIButton!
-    @IBOutlet weak var privateRoomButton: UIButton!
-    @IBOutlet weak var noSmokingButton: UIButton!
-    @IBOutlet weak var kotatsuButton: UIButton!
-    @IBOutlet weak var courseButton: UIButton!
-    
-    @IBOutlet weak var textField: SearchTextField!
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet private weak var nomiButton: UIButton!
+    @IBOutlet private weak var tabeButton: UIButton!
+    @IBOutlet private weak var privateRoomButton: UIButton!
+    @IBOutlet private weak var noSmokingButton: UIButton!
+    @IBOutlet private weak var kotatsuButton: UIButton!
+    @IBOutlet private weak var courseButton: UIButton!
+    @IBOutlet private weak var textField: SearchTextField!
+    @IBOutlet private weak var searchButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var clearButton: UIButton!
     
     enum detaileItemName: String {
         case nomi
@@ -59,7 +56,7 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         navigationItem.title = "詳細検索"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        self.tableView.delegate = self
+        tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableFooterView = UIView()
         self.searchButton.layer.cornerRadius = 15
@@ -76,8 +73,6 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyborad))
         gesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(gesture)
-
-        //カスタムセルを設定
         let nib = UINib(nibName: "SearchConditionCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: cellId)
                 
@@ -93,13 +88,11 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         self.searchConditionArray = []
-        //タイトルと受け取った検索条件を設定
         self.setTitleText()
         tableView.reloadData()
     }
     
     @objc private func dismissKeyborad() {
-        //キーボードを閉じる
         self.view.endEditing(true)
     }
     
@@ -113,8 +106,6 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SearchConditionCell
-
-        //セルに値を設定
         cell.setData(searchConditionArray[indexPath.row])
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator//矢印
@@ -122,8 +113,6 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //セル選択時に呼ばれる
-        //条件設定画面に渡す情報を取得
         fetchItemSearchInfo(index:indexPath.row)
     }
 
@@ -133,19 +122,15 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         switch index {
         case 0:
-            //エリア
+            // エリア
             API.shared.request(path: .large_area, params: params, type: LargeAreaItems.self) { (items) in
-                //戻ってきたときに呼ばれる
                 self.areaArray = items.results.large_area
-                //条件設定画面に遷移
                 self.performSegue(withIdentifier:self.segueId3 , sender: nil)
             }
         case 1:
-            //ジャンル
+            // ジャンル
             API.shared.request(path: .genre, params: params, type: Items.self) { (items) in
-                //戻ってきたときに呼ばれる
                 self.genreArray = items.results.genre
-                //条件設定画面に遷移
                 self.performSegue(withIdentifier:self.segueId1 , sender: nil)
             }
         default:
@@ -216,7 +201,6 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
                     dicName = detaileItemName.course.rawValue
                 }
                 button.switchAction(onAction: {
-                    //選択状態の場合
                     button.backgroundColor = .darkGray
                     self.buttonSelectCheckDic[dicName] = true
                 }) {
@@ -226,12 +210,9 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-    
-    //クリアボタン押下時
+
     @IBAction func clearTap(_ sender: Any) {
-        //キーワードをクリア
         self.textField.text = ""
-        
         self.searchInfoAreaArray = []
         self.searchInfoGenleArray = []
         self.searchConditionArray = []
@@ -246,13 +227,11 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
         self.privateRoomButton.backgroundColor = .clear
         self.noSmokingButton.backgroundColor = .clear
         self.kotatsuButton.backgroundColor = .clear
-        self.courseButton.backgroundColor = .clear
-        
+        self.courseButton.backgroundColor = .clear        
         setTitleText()
         tableView.reloadData()
     }
-    
-    //検索ボタン押下時
+
     @IBAction func searchTap(_ sender: Any) {
         SVProgressHUD.show()
         if !self.validateCheck() {
@@ -263,7 +242,7 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         var params = [String:Any]()
         
-        //エリア(小)
+        // エリア(小)
         var areaCode = ""
         self.searchInfoAreaArray.forEach { (item) in
             areaCode = areaCode + item.id + ","
@@ -272,7 +251,7 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
             areaCode = areaCode.dropLast().description
             params["small_area"] = areaCode
         }
-        //ジャンル
+        // ジャンル
         var genleCode = ""
         self.searchInfoGenleArray.forEach { (item) in
             genleCode = genleCode + item.id + ","
@@ -282,27 +261,26 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
             params["genre"] = genleCode
         }
         
-        //飲み放題
-        params["free_drink"] = self.buttonSelectCheckDic["nomi"] ?? false ? 1 : 0 //trueのとき1
-        //食べ放題
-        params["free_food"] = self.buttonSelectCheckDic["tabe"] ?? false ? 1 : 0 //trueのとき1
-        //個室
-        params["private_room"] = self.buttonSelectCheckDic["privateRoom"] ?? false ? 1 : 0 //trueのとき1
-        //禁煙
-        params["non_smoking"] = self.buttonSelectCheckDic["noSmoking"] ?? false ? 1 : 0 //trueのとき1
-        //掘りごたつ
-        params["horigotatsu"] = self.buttonSelectCheckDic["kotatsu"] ?? false ? 1 : 0 //trueのとき1
-        //コース
-        params["course"] = self.buttonSelectCheckDic["course"] ?? false ? 1 : 0 //trueのとき1
+        // 飲み放題
+        params["free_drink"] = self.buttonSelectCheckDic["nomi"] ?? false ? 1 : 0
+        // 食べ放題
+        params["free_food"] = self.buttonSelectCheckDic["tabe"] ?? false ? 1 : 0
+        // 個室
+        params["private_room"] = self.buttonSelectCheckDic["privateRoom"] ?? false ? 1 : 0
+        // 禁煙
+        params["non_smoking"] = self.buttonSelectCheckDic["noSmoking"] ?? false ? 1 : 0
+        // 掘りごたつ
+        params["horigotatsu"] = self.buttonSelectCheckDic["kotatsu"] ?? false ? 1 : 0
+        // コース
+        params["course"] = self.buttonSelectCheckDic["course"] ?? false ? 1 : 0
         
-        //キーワード
+        // キーワード
         let keyword = self.textField.text ?? ""
         if keyword != ""{
             params["keyword"] = keyword
         }
         
         API.shared.request(path: .gourmet, params: params, type:ShopItems.self) { (items) in
-            //戻ってきたときに呼ばれる
             items.results.shop.forEach { (items) in
                 print("items.name:",items.name + "items.budget.name:",items.budget.name + "items.address:",items.address)
             }
@@ -312,7 +290,6 @@ class DetailSearchViewController: UIViewController, UITableViewDelegate, UITable
                 return
             }
             self.shopDataArray = items.results.shop
-            //条件設定画面に遷移
             self.performSegue(withIdentifier:self.segueId2 , sender: nil)
             SVProgressHUD.dismiss()
         }

@@ -8,8 +8,7 @@
 import UIKit
 
 class SelectTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var title: UILabel!
+    @IBOutlet private weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
