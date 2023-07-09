@@ -26,7 +26,7 @@
 		91467F1A2605A35D0016D93F /* ResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91467F192605A35D0016D93F /* ResultTableViewController.swift */; };
 		91467F202605A4FE0016D93F /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91467F1E2605A4FE0016D93F /* ResultTableViewCell.swift */; };
 		91467F212605A4FE0016D93F /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91467F1F2605A4FE0016D93F /* ResultTableViewCell.xib */; };
-		914A39B426064FA500846727 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914A39B326064FA500846727 /* Button.swift */; };
+		914A39B426064FA500846727 /* UIButton+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914A39B326064FA500846727 /* UIButton+Extention.swift */; };
 		914D231E25FE26090036C5B8 /* SearchConditionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D231D25FE26090036C5B8 /* SearchConditionCell.swift */; };
 		91BFFB6C2602C5D4009F3638 /* SearchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFFB6B2602C5D4009F3638 /* SearchInfo.swift */; };
 		91D5ADC12605FD5700F89BBD /* SelectAreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D5ADBF2605FD5700F89BBD /* SelectAreaTableViewCell.swift */; };
@@ -85,7 +85,7 @@
 		91467F192605A35D0016D93F /* ResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewController.swift; sourceTree = "<group>"; };
 		91467F1E2605A4FE0016D93F /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 		91467F1F2605A4FE0016D93F /* ResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
-		914A39B326064FA500846727 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		914A39B326064FA500846727 /* UIButton+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extention.swift"; sourceTree = "<group>"; };
 		914D231D25FE26090036C5B8 /* SearchConditionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchConditionCell.swift; sourceTree = "<group>"; };
 		91BFFB6B2602C5D4009F3638 /* SearchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfo.swift; sourceTree = "<group>"; };
 		91D5ADBF2605FD5700F89BBD /* SelectAreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAreaTableViewCell.swift; sourceTree = "<group>"; };
@@ -227,13 +227,13 @@
 				91FB633725FA5B4300F7D342 /* Main.storyboard */,
 				913519462605B90100912C90 /* ShadowView.swift */,
 				9108AE7B260961FC001334F6 /* SearchTextField.swift */,
+				914A39B326064FA500846727 /* UIButton+Extention.swift */,
 				91FB633125FA5B4300F7D342 /* AppDelegate.swift */,
 				91FB633325FA5B4300F7D342 /* SceneDelegate.swift */,
 				91FB633A25FA5B4400F7D342 /* Assets.xcassets */,
 				91FB633C25FA5B4400F7D342 /* LaunchScreen.storyboard */,
 				91FB633F25FA5B4400F7D342 /* Info.plist */,
 				910215DE25FCC8070078B4CC /* load.json */,
-				914A39B326064FA500846727 /* Button.swift */,
 			);
 			path = HotpepperSearch;
 			sourceTree = "<group>";
@@ -543,7 +543,7 @@
 				911BFED326021AF50094C4B1 /* API.swift in Sources */,
 				911BFEDC260249F80094C4B1 /* SelectTableViewCell.swift in Sources */,
 				91FB636825FA5C6000F7D342 /* DetailViewController.swift in Sources */,
-				914A39B426064FA500846727 /* Button.swift in Sources */,
+				914A39B426064FA500846727 /* UIButton+Extention.swift in Sources */,
 				9108AE7C260961FC001334F6 /* SearchTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,7 +650,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -705,7 +705,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -724,6 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6522YLS3GH;
 				INFOPLIST_FILE = HotpepperSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -744,6 +745,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6522YLS3GH;
 				INFOPLIST_FILE = HotpepperSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
